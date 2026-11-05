@@ -1,5 +1,8 @@
 import sympy as sp
 
+# Pylint does not fully recognize SymPy symbolic functions.
+# pylint: disable=not-callable
+
 # Define the independent variable and unknown function
 x = sp.symbols('x')
 y = sp.Function('y')
