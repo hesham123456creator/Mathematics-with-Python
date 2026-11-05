@@ -1,55 +1,94 @@
-# Mathematics with Python 🐍
 
-A practical collection of mathematical problems, solutions, and computational experiments using Python.
+# Mathematics with Python
 
-## 🎯 Project Objectives
-- Apply Python to university-level mathematics.
-- Develop symbolic and numerical problem-solving skills.
-- Explore mathematical concepts through programming.
-- Support mathematical research and AI evaluation.
+**Author:** Hesham Moustafa  
+**Position:** Assistant Professor of Mathematics
 
-## 📚 Topics
+## About This Repository
+
+This repository presents practical applications of Python
+in mathematics, numerical analysis, and scientific computing.
+
+It combines mathematical theory, numerical algorithms,
+symbolic computation, and graphical visualization.
+
+## Topics Covered
 
 ### 1. Calculus
-- Limits
-- Differentiation
-- Integration
-- Graphing functions
+- Plotting mathematical functions
+- Symbolic differentiation and integration
+- Numerical integration
 
-### 2. Linear Algebra
-- Matrices and determinants
-- Gaussian elimination
-- Eigenvalues and eigenvectors
-- Systems of linear equations
-
-### 3. Differential Equations
-- First-order differential equations
+### 2. Differential Equations
+- First-order ordinary differential equations
 - Second-order differential equations
-- Initial value problems
-- Numerical solutions
+- Nonhomogeneous differential equations
+- Runge-Kutta methods
+- Euler and RK4 methods
+- Systems of differential equations
+- Boundary value problems
+- Finite difference methods
+- Eigenvalue problems
 
-### 4. Probability and Statistics
-- Probability distributions
-- Statistical calculations
-- Data analysis
+### 3. Partial Differential Equations
+- One-dimensional heat equation
+- One-dimensional wave equation
+- Two-dimensional Laplace equation
+- Jacobi and Gauss-Seidel methods
+- Heat diffusion simulation
 
-### 5. Special Functions
-- Gamma function
-- Beta function
-- Digamma and Polygamma functions
+### 4. Linear Algebra
+- Systems of linear equations
+- Gaussian elimination
+- Matrix operations
+- Eigenvalues and eigenvectors
 
-## 💻 Python Libraries
-- SymPy
+## Python Libraries
+
 - NumPy
+- SymPy
 - SciPy
 - Matplotlib
 
-## 👨‍🏫 Author
-**Hesham Moustafa**
+## Research Interests
 
-Assistant Professor of Mathematics
+- Computational Mathematics
+- Numerical Analysis
+- Special Functions
+- Gamma and Beta Functions
+- Digamma and Polygamma Functions
+- Mathematical Inequalities
+- Complete Monotonicity
 
-Research interests: Mathematical Analysis, Special Functions, Mathematical Inequalities, and Computational Mathematics.
+## Repository Structure
 
-## 🚀 Future Development
-This repository will be expanded with practical examples, mathematical exercises, Python scripts, and visualizations.
+```text
+Mathematics-with-Python/
+│
+├── calculus/
+│
+├── differential_equations/
+│
+├── pde/
+│
+├── linear_algebra/
+│
+└── README.md
+```
+
+## Learning Objectives
+
+- Apply Python to mathematical problems.
+- Implement numerical algorithms.
+- Compare numerical and exact solutions.
+- Analyze numerical accuracy and stability.
+- Develop scientific computing skills.
+
+## Author
+
+Hesham Moustafa  
+Assistant Professor of Mathematics  
+Fahd bin Sultan University  
+Tabuk, Saudi Arabia
+
+GitHub: https://github.com/hesham123456creator
