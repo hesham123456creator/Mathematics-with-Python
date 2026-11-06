@@ -1,0 +1,358 @@
+MATHEMATICS WITH PYTHON
+COMPLETE PYTHON FILE INVENTORY
+=================================================================
+
+FILE 1
+-----------------------------------------------------------------
+Name: finite_difference_method.py
+Location: calculus\calculus\calculus\differential_equations\differential_equations\differential_equations\differential_equations\differential_equations\differential_equations\differential_equations\finite_difference_method.py
+Size: 1168 bytes
+Number of lines: 61
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # Number of subintervals
+
+FILE 2
+-----------------------------------------------------------------
+Name: systems_of_odes.py
+Location: calculus\calculus\calculus\differential_equations\differential_equations\differential_equations\differential_equations\differential_equations\differential_equations\systems_of_odes.py
+Size: 1047 bytes
+Number of lines: 49
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_ivp
+    
+
+FILE 3
+-----------------------------------------------------------------
+Name: euler_vs_rk4.py
+Location: calculus\calculus\calculus\differential_equations\differential_equations\differential_equations\differential_equations\differential_equations\euler_vs_rk4.py
+Size: 1541 bytes
+Number of lines: 78
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # Differential equation
+
+FILE 4
+-----------------------------------------------------------------
+Name: runge_kutta_rk45.py
+Location: calculus\calculus\calculus\differential_equations\differential_equations\differential_equations\differential_equations\runge_kutta_rk45.py
+Size: 1218 bytes
+Number of lines: 72
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_ivp
+    
+
+FILE 5
+-----------------------------------------------------------------
+Name: nonhomogeneous_ode.py
+Location: calculus\calculus\calculus\differential_equations\differential_equations\differential_equations\nonhomogeneous_ode.py
+Size: 1089 bytes
+Number of lines: 58
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_ivp
+    
+
+FILE 6
+-----------------------------------------------------------------
+Name: second_order_ode.py
+Location: calculus\calculus\calculus\differential_equations\differential_equations\second_order_ode.py
+Size: 1075 bytes
+Number of lines: 60
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_ivp
+    
+
+FILE 7
+-----------------------------------------------------------------
+Name: first_order_ode.py
+Location: calculus\calculus\calculus\differential_equations\first_order_ode.py
+Size: 959 bytes
+Number of lines: 48
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_ivp
+    
+
+FILE 8
+-----------------------------------------------------------------
+Name: numerical_integration.py
+Location: calculus\calculus\calculus\numerical_integration.py
+Size: 281 bytes
+Number of lines: 14
+First five lines:
+    
+    import numpy as np
+    from scipy.integrate import quad
+    
+    # Define the function
+
+FILE 9
+-----------------------------------------------------------------
+Name: differentiation_integration.py
+Location: calculus\calculus\differentiation_integration.py
+Size: 482 bytes
+Number of lines: 23
+First five lines:
+    
+    import sympy as sp
+    
+    # Define the symbolic variable
+    x = sp.symbols('x')
+
+FILE 10
+-----------------------------------------------------------------
+Name: differentiation_integration.py
+Location: calculus\differentiation_integration.py
+Size: 482 bytes
+Number of lines: 23
+First five lines:
+    
+    import sympy as sp
+    
+    # Define the symbolic variable
+    x = sp.symbols('x')
+
+FILE 11
+-----------------------------------------------------------------
+Name: exponential_function.py
+Location: calculus\exponential_function.py
+Size: 419 bytes
+Number of lines: 22
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # Define the domain
+
+FILE 12
+-----------------------------------------------------------------
+Name: numerical_integration.py
+Location: calculus\numerical_integration.py
+Size: 281 bytes
+Number of lines: 14
+First five lines:
+    
+    import numpy as np
+    from scipy.integrate import quad
+    
+    # Define the function
+
+FILE 13
+-----------------------------------------------------------------
+Name: compare_bvp_methods.py
+Location: differential_equations\compare_bvp_methods.py
+Size: 1557 bytes
+Number of lines: 68
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_bvp
+    
+    # Problem: y'' + y = 0
+
+FILE 14
+-----------------------------------------------------------------
+Name: compare_eigenfunctions.py
+Location: differential_equations\compare_eigenfunctions.py
+Size: 1384 bytes
+Number of lines: 59
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.linalg import eigh_tridiagonal
+    
+    # Problem interval
+
+FILE 15
+-----------------------------------------------------------------
+Name: eigenvalue_accuracy.py
+Location: differential_equations\eigenvalue_accuracy.py
+Size: 1397 bytes
+Number of lines: 60
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.linalg import eigh_tridiagonal
+    
+    # Exact first three eigenvalues
+
+FILE 16
+-----------------------------------------------------------------
+Name: eigenvalue_problem.py
+Location: differential_equations\eigenvalue_problem.py
+Size: 1303 bytes
+Number of lines: 53
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.linalg import eigh_tridiagonal
+    
+    # Define the interval
+
+FILE 17
+-----------------------------------------------------------------
+Name: euler_vs_rk4.py
+Location: differential_equations\euler_vs_rk4.py
+Size: 1326 bytes
+Number of lines: 60
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # Differential equation: y' = -2y
+    def f(x, y):
+
+FILE 18
+-----------------------------------------------------------------
+Name: finite_difference_accuracy.py
+Location: differential_equations\finite_difference_accuracy.py
+Size: 1371 bytes
+Number of lines: 59
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # Exact solution
+    def exact_solution(x):
+
+FILE 19
+-----------------------------------------------------------------
+Name: finite_difference_method.py
+Location: differential_equations\finite_difference_method.py
+Size: 1129 bytes
+Number of lines: 55
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # Boundary value problem:
+    # y''(x) = -pi^2 sin(pi*x)
+
+FILE 20
+-----------------------------------------------------------------
+Name: first_order_ode.py
+Location: differential_equations\first_order_ode.py
+Size: 500 bytes
+Number of lines: 21
+First five lines:
+    import sympy as sp
+    
+    # Pylint does not fully recognize SymPy symbolic functions.
+    # pylint: disable=not-callable
+    
+
+FILE 21
+-----------------------------------------------------------------
+Name: nonhomogeneous_ode.py
+Location: differential_equations\nonhomogeneous_ode.py
+Size: 546 bytes
+Number of lines: 24
+First five lines:
+    import sympy as sp
+    
+    # Pylint does not fully recognize SymPy symbolic functions.
+    # pylint: disable=not-callable
+    
+
+FILE 22
+-----------------------------------------------------------------
+Name: nonlinear_bvp.py
+Location: differential_equations\nonlinear_bvp.py
+Size: 957 bytes
+Number of lines: 47
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_bvp
+    
+    # Nonlinear BVP:
+
+FILE 23
+-----------------------------------------------------------------
+Name: runge_kutta_rk45.py
+Location: differential_equations\runge_kutta_rk45.py
+Size: 998 bytes
+Number of lines: 48
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_ivp
+    
+    # Differential equation: y' = -2y
+
+FILE 24
+-----------------------------------------------------------------
+Name: second_order_ode.py
+Location: differential_equations\second_order_ode.py
+Size: 544 bytes
+Number of lines: 24
+First five lines:
+    import sympy as sp
+    
+    # Pylint does not fully recognize SymPy symbolic functions.
+    # pylint: disable=not-callable
+    
+
+FILE 25
+-----------------------------------------------------------------
+Name: solve_bvp_example.py
+Location: differential_equations\solve_bvp_example.py
+Size: 1132 bytes
+Number of lines: 50
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_bvp
+    
+    # Convert the second-order equation into a system:
+
+FILE 26
+-----------------------------------------------------------------
+Name: systems_of_odes.py
+Location: differential_equations\systems_of_odes.py
+Size: 1066 bytes
+Number of lines: 50
+First five lines:
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.integrate import solve_ivp
+    
+    # Define the system:
+
+FILE 27
+-----------------------------------------------------------------
+Name: heat_diffusion_project.py
+Location: pde\heat_diffusion_project.py
+Size: 2859 bytes
+Number of lines: 149
+First five lines:
+    
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    # --------------------------------
+
+=================================================================
+TOTAL PYTHON FILES: 27
+TOTAL LINES: 1349

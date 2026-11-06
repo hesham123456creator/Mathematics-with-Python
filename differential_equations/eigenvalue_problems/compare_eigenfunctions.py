@@ -1,3 +1,4 @@
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.linalg import eigh_tridiagonal
@@ -11,7 +12,7 @@ h = L / N
 diagonal = 2 * np.ones(N - 1) / h**2
 off_diagonal = -np.ones(N - 2) / h**2
 
-# Compute the first three eigenpairs
+# Compute the first three eigenvalues and eigenvectors
 eigenvalues, eigenvectors = eigh_tridiagonal(
     diagonal,
     off_diagonal,
@@ -21,6 +22,9 @@ eigenvalues, eigenvectors = eigh_tridiagonal(
 
 # Grid including boundary points
 x = np.linspace(0, L, N + 1)
+
+print("Comparison of Numerical and Exact Eigenfunctions")
+print("-" * 55)
 
 # Compare numerical and exact eigenfunctions
 for i in range(3):
@@ -34,26 +38,47 @@ for i in range(3):
     # Normalize numerical eigenfunction
     numerical /= np.max(np.abs(numerical))
 
-    # Correct the sign
-    if numerical[N // 2] < 0:
+    # Correct the sign using the first interior point
+    if numerical[1] < 0:
         numerical *= -1
 
     # Exact eigenfunction
     exact = np.sin(n * np.pi * x)
 
-    # Calculate maximum error
+    # Calculate maximum absolute error
     error = np.max(np.abs(numerical - exact))
 
-    print(f"Eigenfunction {n}: Maximum error = {error:.8e}")
+    print(
+        f"Eigenfunction {n}: "
+        f"Maximum error = {error:.8e}"
+    )
 
     # Plot comparison
-    plt.figure()
-    plt.plot(x, numerical, label="Numerical eigenfunction")
-    plt.plot(x, exact, "--", label="Exact eigenfunction")
+    plt.figure(figsize=(8, 5))
+
+    plt.plot(
+        x,
+        numerical,
+        label="Numerical eigenfunction",
+        linewidth=2
+    )
+
+    plt.plot(
+        x,
+        exact,
+        "--",
+        label="Exact eigenfunction",
+        linewidth=2
+    )
 
     plt.xlabel("x")
     plt.ylabel("Eigenfunction")
+
     plt.title(f"Comparison of Eigenfunction {n}")
+
     plt.legend()
-    plt.grid()
+    plt.grid(True)
+    plt.tight_layout()
     plt.show()
+
+
