@@ -1,38 +1,45 @@
-# Project Roadmap
+# Mathematics with Python — Project Roadmap
 
-This roadmap outlines the planned development of Mathematics with Python.
+## 1. Calculus
+- Limits and continuity
+- Differentiation and applications
+- Integration and applications
+- Numerical approximation
 
-## Completed
+## 2. Differential Equations
+- First-order ordinary differential equations
+- Second-order ordinary differential equations
+- Nonhomogeneous differential equations
+- Systems of differential equations
+- Euler's method and Runge–Kutta methods
+- Boundary value problems
+- Eigenvalue problems
 
-- [x] Calculus examples
-- [x] Differentiation and integration
-- [x] Numerical integration
-- [x] First-order and second-order ODEs
-- [x] Numerical methods for differential equations
-- [x] Boundary value problems
-- [x] Eigenvalue problems
-- [x] Heat diffusion simulation
-- [x] Numerical accuracy and error analysis
+## 3. Partial Differential Equations
+- Heat equation
+- Finite difference methods
+- Numerical simulations
+- Error analysis
 
-## Planned
+## 4. Symbolic Mathematics
+- Symbolic differentiation and integration
+- Exact solutions using SymPy
+- Mathematical verification
 
-- [ ] Numerical methods for nonlinear differential equations
-- [ ] Additional partial differential equation examples
-- [ ] Fourier series and Fourier transforms
-- [ ] Numerical linear algebra
-- [ ] Optimization methods
-- [ ] More mathematical visualization projects
+## 5. Future Developments
+- Numerical optimization
+- Fourier analysis
+- Advanced mathematical modeling
+- More Python projects related to special functions and inequalities
 
-## Technologies
-
-- Python
+## Main Python Libraries
 - NumPy
 - SciPy
 - SymPy
 - Matplotlib
 
-## Author
+---
 
-Hesham Moustafa  
+**Author:** Hesham Moustafa  
 Assistant Professor of Mathematics  
 Fahd bin Sultan University, Saudi Arabia
