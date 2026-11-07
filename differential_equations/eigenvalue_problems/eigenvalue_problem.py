@@ -1,8 +1,9 @@
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.linalg import eigh_tridiagonal
 
-# Define the interval
+# Define the interval and discretization
 L = 1.0
 N = 100
 h = L / N
@@ -22,32 +23,54 @@ eigenvalues, eigenvectors = eigh_tridiagonal(
 # Numerical grid
 x = np.linspace(0, L, N + 1)
 
-print("Numerical and exact eigenvalues:")
+print("Numerical Eigenvalue Problem")
+print("=" * 65)
 
+# Compare numerical and exact eigenvalues
 for n, eigenvalue in enumerate(eigenvalues, start=1):
-    exact = (n * np.pi)**2
-    print(
-        f"n = {n}, Numerical = {eigenvalue:.8f}, "
-        f"Exact = {exact:.8f}"
-    )
 
-# Plot the eigenfunctions
+    exact = (n * np.pi)**2
+    absolute_error = abs(eigenvalue - exact)
+    relative_error = absolute_error / exact
+
+    print(f"\nEigenvalue {n}")
+    print(f"Numerical value: {eigenvalue:.10f}")
+    print(f"Exact value:     {exact:.10f}")
+    print(f"Absolute error:  {absolute_error:.8e}")
+    print(f"Relative error:  {relative_error:.8e}")
+
+# Plot the numerical eigenfunctions
+plt.figure(figsize=(9, 6))
+
 for i in range(3):
+
     eigenfunction = np.zeros(N + 1)
     eigenfunction[1:N] = eigenvectors[:, i]
 
     # Normalize the eigenfunction
     eigenfunction /= np.max(np.abs(eigenfunction))
 
-    # Make the first eigenfunction positive near the center
-    if eigenfunction[N // 2] < 0:
+    # Choose a consistent positive orientation
+    max_index = np.argmax(np.abs(eigenfunction))
+
+    if eigenfunction[max_index] < 0:
         eigenfunction *= -1
 
-    plt.plot(x, eigenfunction, label=f"Eigenfunction {i + 1}")
+    plt.plot(
+        x,
+        eigenfunction,
+        linewidth=2,
+        label=f"Eigenfunction {i + 1}"
+    )
 
 plt.xlabel("x")
 plt.ylabel("Eigenfunction")
-plt.title("Eigenfunctions of a Boundary Value Problem")
+plt.title("Numerical Eigenfunctions")
 plt.legend()
-plt.grid()
+plt.grid(True)
+plt.tight_layout()
+
+# Save the figure
+plt.savefig("eigenvalue_problem.png", dpi=300)
+
 plt.show()
