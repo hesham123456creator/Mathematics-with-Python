@@ -1,9 +1,10 @@
 
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.linalg import eigh_tridiagonal
 
-# Problem interval
+# Problem interval and discretization
 L = 1.0
 N = 100
 h = L / N
@@ -24,9 +25,8 @@ eigenvalues, eigenvectors = eigh_tridiagonal(
 x = np.linspace(0, L, N + 1)
 
 print("Comparison of Numerical and Exact Eigenfunctions")
-print("-" * 55)
+print("=" * 60)
 
-# Compare numerical and exact eigenfunctions
 for i in range(3):
 
     n = i + 1
@@ -38,8 +38,10 @@ for i in range(3):
     # Normalize numerical eigenfunction
     numerical /= np.max(np.abs(numerical))
 
-    # Correct the sign using the first interior point
-    if numerical[1] < 0:
+    # Choose positive orientation
+    max_index = np.argmax(np.abs(numerical))
+
+    if numerical[max_index] < 0:
         numerical *= -1
 
     # Exact eigenfunction
@@ -48,10 +50,8 @@ for i in range(3):
     # Calculate maximum absolute error
     error = np.max(np.abs(numerical - exact))
 
-    print(
-        f"Eigenfunction {n}: "
-        f"Maximum error = {error:.8e}"
-    )
+    print(f"\nEigenfunction {n}")
+    print(f"Maximum absolute error: {error:.8e}")
 
     # Plot comparison
     plt.figure(figsize=(8, 5))
@@ -73,12 +73,17 @@ for i in range(3):
 
     plt.xlabel("x")
     plt.ylabel("Eigenfunction")
-
     plt.title(f"Comparison of Eigenfunction {n}")
 
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
+
+    # Save the figure
+    plt.savefig(
+        f"eigenfunction_comparison_{n}.png",
+        dpi=300
+    )
+
     plt.show()
-
-
+    plt.close()
