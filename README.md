@@ -18,7 +18,28 @@ It includes symbolic calculations, numerical algorithms, differential equations,
 The projects combine mathematical theory, computational implementation, numerical verification, and graphical visualization.
 
 ## Project Categories
+## Featured Projects
 
+### Numerical Solutions of Differential Equations
+
+1. [Euler's Method vs. RK4](differential_equations/numerical/euler_vs_rk4_comparison.py)
+2. [First-Order ODE Using RK4](differential_equations/numerical/first_order_ode_rk4.py)
+3. [Second-Order ODE Using RK4](differential_equations/numerical/second_order_ode_rk4.py)
+4. [Nonhomogeneous ODE Using RK4](differential_equations/numerical/nonhomogeneous_ode_rk4.py)
+5. [Runge–Kutta RK45](differential_equations/numerical/runge_kutta_rk45.py)
+6. [Systems of ODEs Using RK4](differential_equations/numerical/systems_of_odes_rk4.py)
+
+### Boundary Value Problems
+
+1. [Finite Difference Method](differential_equations/boundary_value_problems/finite_difference_method.py)
+2. [Nonlinear Boundary Value Problems](differential_equations/boundary_value_problems/nonlinear_bvp.py)
+3. [Comparing BVP Methods](differential_equations/boundary_value_problems/compare_bvp_methods.py)
+
+### Eigenvalue Problems
+
+1. [Numerical Eigenvalue Problems](differential_equations/eigenvalue_problems/eigenvalue_problem.py)
+2. [Eigenvalue Accuracy](differential_equations/eigenvalue_problems/eigenvalue_accuracy.py)
+3. [Comparing Eigenfunctions](differential_equations/eigenvalue_problems/compare_eigenfunctions.py)
 ### 1. Calculus
 - Exponential and mathematical functions
 - Differentiation and integration
