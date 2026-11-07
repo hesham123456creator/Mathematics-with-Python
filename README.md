@@ -1,45 +1,159 @@
 # Mathematics with Python
+### Computational Mathematics | Numerical Analysis | Scientific Computing
 
-A collection of Python projects and numerical methods for exploring mathematical concepts and solving mathematical problems.
+A collection of mathematical projects, Python implementations, numerical experiments, and computational tools designed to explore mathematical concepts and solve mathematical problems.
 
-## Topics
+**Author:** Hesham Moustafa  
+**Position:** Assistant Professor of Mathematics  
+**Institution:** Fahd bin Sultan University, Saudi Arabia
+
+---
+
+## About This Repository
+
+This repository demonstrates the application of Python programming to university-level mathematics, computational mathematics, and scientific problem-solving.
+
+It includes symbolic calculations, numerical algorithms, differential equations, boundary value problems, eigenvalue problems, and partial differential equations.
+
+The projects combine mathematical theory, computational implementation, numerical verification, and graphical visualization.
+
+## Project Categories
 
 ### 1. Calculus
-- Exponential functions
+- Exponential and mathematical functions
 - Differentiation and integration
 - Numerical integration
+- Function visualization
+
+[Explore Calculus Projects](calculus/)
 
 ### 2. Differential Equations
+
+**Symbolic Solutions**
+- First-order differential equations
+- Second-order differential equations
+- Nonhomogeneous differential equations
+
+**Numerical Methods**
+- Euler's method
+- Runge–Kutta methods (RK4 and RK45)
 - First-order and second-order ODEs
-- Numerical solutions using Euler and Runge–Kutta methods
 - Systems of differential equations
-- Boundary value problems
-- Eigenvalue problems
-- Numerical accuracy and method comparisons
+- Numerical accuracy comparisons
+
+**Boundary Value Problems**
+- Finite difference methods
+- Nonlinear boundary value problems
+- Numerical solutions using SciPy's `solve_bvp()`
+- Accuracy and performance comparisons
+
+**Eigenvalue Problems**
+- Numerical eigenvalue calculations
+- Eigenfunction comparisons
+- Eigenvalue accuracy analysis
+
+[Explore Differential Equations Projects](differential_equations/)
 
 ### 3. Partial Differential Equations
 - Heat diffusion equation
 - Finite difference methods
-- Numerical solutions and error analysis
+- Numerical simulation
+- Error analysis
 
-## Python Libraries
+[Explore PDE Projects](pde/)
 
-- NumPy
-- SciPy
-- SymPy
-- Matplotlib
+## Featured Computational Projects
 
-## Author
+| Project | Mathematical Method |
+|---|---|
+| Euler vs. RK4 Comparison | Numerical ODE solutions |
+| Second-Order ODE Solver | Runge–Kutta method |
+| Systems of ODEs | Numerical integration |
+| Nonlinear Boundary Value Problem | SciPy `solve_bvp()` |
+| Heat Diffusion Simulation | Finite difference method |
+| Eigenvalue Accuracy | Numerical eigenvalue analysis |
 
-**Hesham Moustafa**
+## Python Technologies
 
-Assistant Professor of Mathematics  
-Fahd bin Sultan University, Saudi Arabia
+- **NumPy:** Numerical computing and arrays
+- **SciPy:** Scientific computing and differential equation solvers
+- **SymPy:** Symbolic mathematics
+- **Matplotlib:** Mathematical visualization
+- **Python:** Scientific programming and algorithm implementation
+
+## Example: Euler's Method vs. Runge–Kutta RK4
+
+One project compares Euler's method and the fourth-order Runge–Kutta method for solving an initial value problem.
+
+The numerical experiment demonstrates the difference in accuracy between the two methods.
+
+| Method | Maximum Absolute Error |
+|---|---:|
+| Euler | 0.439687 |
+| RK4 | 0.000109 |
+
+The experiment illustrates the improved numerical accuracy obtained using the RK4 method for the selected step size and problem.
+
+## Installation and Usage
+
+Clone the repository:
+
+```bash
+git clone https://github.com/hesham123456creator/Mathematics-with-Python.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd Mathematics-with-Python
+```
+
+Install the required libraries:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run an example:
+
+```bash
+python differential_equations/numerical/euler_vs_rk4_comparison.py
+```
 
 ## Research Interests
 
-Computational mathematics, numerical analysis, differential equations, special functions, and mathematical inequalities.
+My research interests include:
+
+- Computational mathematics
+- Numerical analysis
+- Differential equations
+- Special functions
+- Gamma, beta, digamma, and polygamma functions
+- Bateman's G-functions
+- Mathematical inequalities
+- Complete monotonicity
+
+I am particularly interested in combining analytical mathematical techniques with symbolic and numerical computational methods.
+
+## Academic Background
+
+**Hesham Moustafa**  
+Assistant Professor of Mathematics  
+Fahd bin Sultan University  
+Tabuk, Saudi Arabia
+
+Research and teaching experience in calculus, differential equations, probability, statistics, linear algebra, and applied mathematics.
+
+## Repository Development
+
+This repository is continuously updated with new mathematical examples, numerical experiments, algorithms, and computational research projects.
+
+Contributions, suggestions, and academic collaborations are welcome.
 
 ---
 
-This repository is continuously updated with new mathematical examples and computational projects.
+**GitHub:** [hesham123456creator](https://github.com/hesham123456creator)
+
+**Repository:** [Mathematics-with-Python](https://github.com/hesham123456creator/Mathematics-with-Python)
+
+**License:** MIT
