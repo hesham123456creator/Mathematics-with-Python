@@ -170,7 +170,28 @@ Research and teaching experience in calculus, differential equations, probabilit
 This repository is continuously updated with new mathematical examples, numerical experiments, algorithms, and computational research projects.
 
 Contributions, suggestions, and academic collaborations are welcome.
+## Numerical Results: Euler's Method vs. RK4
 
+The repository includes a numerical comparison of Euler's method and the classical fourth-order Runge–Kutta (RK4) method.
+
+### Accuracy Comparison
+
+| Method | Maximum Absolute Error |
+|---|---:|
+| Euler's Method | 0.439687 |
+| RK4 | 0.000109 |
+
+### Example at the Final Point
+
+| Quantity | Value |
+|---|---:|
+| Exact solution | 5.305472 |
+| Euler approximation | 4.865785 |
+| RK4 approximation | 5.305363 |
+
+**Observation:** For this example, RK4 produces a substantially more accurate numerical approximation than Euler's method.
+
+The results illustrate the importance of selecting an appropriate numerical method when solving differential equations.
 ---
 
 **GitHub:** [hesham123456creator](https://github.com/hesham123456creator)
