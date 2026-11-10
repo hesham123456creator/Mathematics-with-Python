@@ -1,3 +1,4 @@
+
 # Pylint does not fully recognize SymPy symbolic functions.
 # pylint: disable=not-callable
 
@@ -99,8 +100,7 @@ y_initial = particular_solution.subs(x, 0)
 dy_initial = sp.diff(particular_solution, x).subs(x, 0)
 
 # Verify the initial conditions and the differential equation
-ivp_verification = sp.simplify(
-    sp.diff(particular_solution, x, 2)
+ivp_verification = sp.simplify(    sp.diff(particular_solution, x, 2)
     - 3*sp.diff(particular_solution, x)
     + 2*particular_solution
 )
