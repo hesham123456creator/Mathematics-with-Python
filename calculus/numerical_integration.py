@@ -1,4 +1,5 @@
-
+# Pylint does not fully recognize SciPy's dynamically exposed functions.
+# pylint: disable=no-name-in-module
 import numpy as np
 import matplotlib.pyplot as plt
 
