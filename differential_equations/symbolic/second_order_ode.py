@@ -98,20 +98,24 @@ sp.pprint(particular_solution)
 y_initial = particular_solution.subs(x, 0)
 dy_initial = sp.diff(particular_solution, x).subs(x, 0)
 
-print("\nVerification of initial conditions:")
-print("y(0) =", y_initial)
-print("y'(0) =", dy_initial)
-
-
-# Verify particular solution
+# Verify the initial conditions and the differential equation
 ivp_verification = sp.simplify(
     sp.diff(particular_solution, x, 2)
     - 3*sp.diff(particular_solution, x)
     + 2*particular_solution
 )
 
+print("\nVerification of initial conditions:")
+print("y(0) =", y_initial)
+print("y'(0) =", dy_initial)
+
 print("\nVerification of particular solution:")
 sp.pprint(ivp_verification)
+
+if y_initial == 1 and dy_initial == 0 and ivp_verification == 0:
+    print("IVP verification successful.")
+else:
+    print("IVP verification failed.")
 
 
 # Convert symbolic solutions to numerical functions
