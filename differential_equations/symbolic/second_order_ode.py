@@ -1,3 +1,5 @@
+# Pylint does not fully recognize SymPy symbolic functions.
+# pylint: disable=not-callable
 
 import sympy as sp
 import numpy as np
