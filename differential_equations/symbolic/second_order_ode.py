@@ -1,3 +1,11 @@
+"""
+Solve and visualize a homogeneous second-order ODE using SymPy and SciPy.
+
+The script derives the characteristic roots and symbolic solution,
+verifies the initial conditions, and compares the exact solution
+with a numerical RK45 approximation.
+"""
+
 from pathlib import Path
 # Pylint does not fully recognize SymPy symbolic functions.
 # pylint: disable=not-callable
@@ -5,6 +13,7 @@ from pathlib import Path
 import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
 
 # Directory for generated plots
 IMAGE_DIR = Path(__file__).resolve().parents[2] / "images"
@@ -99,8 +108,13 @@ sp.pprint(particular_solution)
 
 
 # Verify initial conditions
-y_initial = particular_solution.subs(x, 0)
-dy_initial = sp.diff(particular_solution, x).subs(x, 0)
+y_initial = sp.simplify(particular_solution.subs(x, 0))
+dy_initial = sp.simplify(
+    sp.diff(particular_solution, x).subs(x, 0)
+)
+
+y_residual = sp.simplify(y_initial - 1)
+dy_residual = sp.simplify(dy_initial - 0)
 
 # Verify the initial conditions and the differential equation
 ivp_verification = sp.simplify(
@@ -112,18 +126,25 @@ ivp_verification = sp.simplify(
 print("\nVerification of initial conditions:")
 print("y(0) =", y_initial)
 print("y'(0) =", dy_initial)
+print("\nInitial-condition residuals:")
+print("y(0) - 1 =", y_residual)
+print("y'(0) - 0 =", dy_residual)
 
 print("\nVerification of particular solution:")
 sp.pprint(ivp_verification)
 
-if y_initial == 1 and dy_initial == 0 and ivp_verification == 0:
+if (
+    y_residual == 0
+    and dy_residual == 0
+    and ivp_verification == 0
+):
     print("IVP verification successful.")
 else:
     print("IVP verification failed.")
 
 
 # Convert symbolic solutions to numerical functions
-x_values = np.linspace(-2, 2, 300)
+x_values = np.linspace(-2, 2, 301)
 
 general_function = sp.lambdify(
     (x, C1, C2),
@@ -138,7 +159,69 @@ particular_function = sp.lambdify(
 )
 
 
+# Numerical solution using SciPy's RK45 method
+
+def ode_system(_x_value, state):
+    """Define the first-order system equivalent to the second-order ODE."""
+    y_value, dy_value = state
+    return [dy_value, 3 * dy_value - 2 * y_value]
+
+# Integrate forward from x = 0 to x = 2
+positive_x = x_values[x_values >= 0]
+
+forward_solution = solve_ivp(
+    ode_system,
+    (0, 2),
+    [1, 0],
+    method="RK45",
+    t_eval=positive_x,
+    rtol=1e-9,
+    atol=1e-11
+)
+
+# Integrate backward from x = 0 to x = -2
+negative_x = x_values[x_values <= 0][::-1]
+
+backward_solution = solve_ivp(
+    ode_system,
+    (0, -2),
+    [1, 0],
+    method="RK45",
+    t_eval=negative_x,
+    rtol=1e-9,
+    atol=1e-11
+)
+
+if not forward_solution.success:
+    raise RuntimeError(forward_solution.message)
+
+if not backward_solution.success:
+    raise RuntimeError(backward_solution.message)
+
+# Combine numerical results in ascending x order
+numerical_values = np.concatenate((
+    backward_solution.y[0][::-1],
+    forward_solution.y[0][1:]
+))
+
+# Compare numerical and exact solutions
+exact_values = particular_function(x_values)
+
+absolute_errors = np.abs(
+    numerical_values - exact_values
+)
+
+maximum_error = np.max(absolute_errors)
+
+print("\nNUMERICAL VERIFICATION")
+print("=" * 60)
+print("Numerical method: RK45")
+print("Number of evaluation points:", len(x_values))
+print(f"Maximum absolute error: {maximum_error:.6e}")
+
+
 # Plot several general solutions
+
 plt.figure(figsize=(9, 5))
 
 for c1, c2 in [(1, 0), (0, 1), (1, 1), (1, -1), (-1, 1)]:
@@ -177,4 +260,36 @@ plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.savefig(IMAGE_DIR / "second_order_ode.png", dpi=300)
+plt.show()
+
+
+# Plot the exact and numerical solutions together
+plt.figure(figsize=(9, 5))
+
+plt.plot(
+    x_values,
+    exact_values,
+    label="Exact solution",
+    linewidth=2
+)
+
+plt.plot(
+    x_values,
+    numerical_values,
+    "--",
+    label="Numerical solution (RK45)",
+    linewidth=2
+)
+
+plt.xlabel("x")
+plt.ylabel("y(x)")
+plt.title("Exact vs. Numerical Solution of the Homogeneous ODE")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.savefig(
+    IMAGE_DIR / "second_order_ode_comparison.png",
+    dpi=300
+)
+
 plt.show()
