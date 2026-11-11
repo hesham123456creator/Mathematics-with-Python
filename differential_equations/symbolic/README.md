@@ -2,7 +2,7 @@
 
 ## Overview
 
-This folder contains symbolic solutions of ordinary differential equations (ODEs) using Python's SymPy library.
+This folder contains symbolic solutions of ordinary differential equations (ODEs) using Python's **SymPy** library.
 
 The projects demonstrate how computer algebra systems can solve first-order and second-order differential equations, determine general and particular solutions, apply initial conditions, and verify analytical results symbolically.
 
@@ -19,6 +19,7 @@ y'+2y=e^x.
 \]
 
 The program:
+
 - Defines the differential equation symbolically.
 - Computes its general solution using `sympy.dsolve()`.
 - Verifies the solution by substitution.
@@ -36,6 +37,7 @@ y''-3y'+2y=e^x.
 \]
 
 The program:
+
 - Determines the general solution.
 - Verifies the solution symbolically.
 - Applies two initial conditions.
@@ -54,12 +56,39 @@ y''-3y'+2y=0.
 \]
 
 The program:
+
 - Constructs and solves the characteristic equation.
 - Determines the characteristic roots.
 - Computes the general solution using SymPy.
 - Verifies the solution symbolically.
 - Applies initial conditions.
+- Determines the integration constants.
+- Verifies the particular solution and initial conditions.
 - Visualizes the general and particular solutions.
+
+For the initial conditions
+
+\[
+y(0)=1,\qquad y'(0)=0,
+\]
+
+the resulting particular solution is
+
+\[
+\boxed{y(x)=2e^x-e^{2x}}.
+\]
+
+#### Generated Visualizations
+
+The program generates two plots, which are saved in the repository's `images/` directory.
+
+**General solution**
+
+![General solution of the homogeneous second-order ODE](../../images/second_order_ode_general.png)
+
+**Particular solution**
+
+![Particular solution of the homogeneous second-order ODE](../../images/second_order_ode.png)
 
 ## Mathematical Methods
 
@@ -96,24 +125,24 @@ pip install -r requirements.txt
 
 ## Running the Programs
 
-Execute any program from this folder using Python.
+Run the following commands from the repository root directory:
 
-For example:
+**First-order ODE:**
 
 ```bash
-python first_order_ode.py
+python differential_equations/symbolic/first_order_ode.py
 ```
 
-To solve the nonhomogeneous second-order equation:
+**Nonhomogeneous second-order ODE:**
 
 ```bash
-python nonhomogeneous_ode.py
+python differential_equations/symbolic/nonhomogeneous_ode.py
 ```
 
-To solve the homogeneous second-order equation:
+**Homogeneous second-order ODE:**
 
 ```bash
-python second_order_ode.py
+python differential_equations/symbolic/second_order_ode.py
 ```
 
 Each program displays symbolic mathematical results and generates plots when executed.
