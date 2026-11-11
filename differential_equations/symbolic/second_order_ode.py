@@ -1,4 +1,4 @@
-
+from pathlib import Path
 # Pylint does not fully recognize SymPy symbolic functions.
 # pylint: disable=not-callable
 
@@ -6,6 +6,9 @@ import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Directory for generated plots
+IMAGE_DIR = Path(__file__).resolve().parents[2] / "images"
+IMAGE_DIR.mkdir(parents=True, exist_ok=True)
 
 # Define symbolic variables and unknown function
 x = sp.symbols("x", real=True)
@@ -100,9 +103,10 @@ y_initial = particular_solution.subs(x, 0)
 dy_initial = sp.diff(particular_solution, x).subs(x, 0)
 
 # Verify the initial conditions and the differential equation
-ivp_verification = sp.simplify(    sp.diff(particular_solution, x, 2)
-    - 3*sp.diff(particular_solution, x)
-    + 2*particular_solution
+ivp_verification = sp.simplify(
+    sp.diff(particular_solution, x, 2)
+    - 3 * sp.diff(particular_solution, x)
+    + 2 * particular_solution
 )
 
 print("\nVerification of initial conditions:")
@@ -150,7 +154,7 @@ plt.title("General Solutions of a Homogeneous Second-Order ODE")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("second_order_ode_general.png", dpi=300)
+plt.savefig(IMAGE_DIR / "second_order_ode_general.png", dpi=300)
 plt.show()
 
 
@@ -172,5 +176,5 @@ plt.title("Homogeneous Second-Order ODE: Initial-Value Solution")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("second_order_ode.png", dpi=300)
+plt.savefig(IMAGE_DIR / "second_order_ode.png", dpi=300)
 plt.show()
