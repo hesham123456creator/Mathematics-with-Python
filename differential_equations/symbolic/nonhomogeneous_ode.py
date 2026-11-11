@@ -1,9 +1,17 @@
+
+from pathlib import Path
+
 # Pylint does not fully recognize SymPy symbolic functions.
 # pylint: disable=not-callable
 
 import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
+
+
+# Directory for generated plots
+IMAGE_DIR = Path(__file__).resolve().parents[2] / "images"
+IMAGE_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # Define symbolic variables and unknown function
@@ -16,8 +24,8 @@ y = sp.Function("y")
 # y'' - 3y' + 2y = exp(x)
 ode = sp.Eq(
     sp.diff(y(x), x, 2)
-    - 3*sp.diff(y(x), x)
-    + 2*y(x),
+    - 3 * sp.diff(y(x), x)
+    + 2 * y(x),
     sp.exp(x)
 )
 
@@ -27,11 +35,11 @@ solution = sp.dsolve(ode, y(x))
 general_solution = solution.rhs
 
 
-# Verify the symbolic solution
+# Verify the general solution
 verification = sp.simplify(
     sp.diff(general_solution, x, 2)
-    - 3*sp.diff(general_solution, x)
-    + 2*general_solution
+    - 3 * sp.diff(general_solution, x)
+    + 2 * general_solution
     - sp.exp(x)
 )
 
@@ -84,24 +92,46 @@ sp.pprint(particular_solution)
 
 
 # Verify initial conditions
-y_initial = particular_solution.subs(x, 0)
-dy_initial = sp.diff(particular_solution, x).subs(x, 0)
+y_initial = sp.simplify(
+    particular_solution.subs(x, 0)
+)
+
+dy_initial = sp.simplify(
+    sp.diff(particular_solution, x).subs(x, 0)
+)
+
+y_residual = sp.simplify(y_initial - 1)
+dy_residual = sp.simplify(dy_initial)
 
 print("\nVerification of initial conditions:")
 print("y(0) =", y_initial)
 print("y'(0) =", dy_initial)
 
+print("\nInitial-condition residuals:")
+print("y(0) - 1 =", y_residual)
+print("y'(0) - 0 =", dy_residual)
+
+if y_residual == 0 and dy_residual == 0:
+    print("Initial conditions verified successfully.")
+else:
+    print("Initial-condition verification failed.")
+
 
 # Verify particular solution
 ivp_verification = sp.simplify(
     sp.diff(particular_solution, x, 2)
-    - 3*sp.diff(particular_solution, x)
-    + 2*particular_solution
+    - 3 * sp.diff(particular_solution, x)
+    + 2 * particular_solution
     - sp.exp(x)
 )
 
 print("\nVerification of particular solution:")
 sp.pprint(ivp_verification)
+
+if ivp_verification == 0:
+    print("Particular solution satisfies the ODE.")
+else:
+    print("Particular solution verification failed.")
 
 
 # Convert symbolic expressions into numerical functions
@@ -136,7 +166,12 @@ plt.title("General Solutions of a Nonhomogeneous Second-Order ODE")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("nonhomogeneous_ode_general.png", dpi=300)
+
+plt.savefig(
+    IMAGE_DIR / "nonhomogeneous_ode_general.png",
+    dpi=300
+)
+
 plt.show()
 
 
@@ -150,7 +185,11 @@ plt.plot(
     linewidth=2
 )
 
-plt.scatter([0], [1], label="Initial point (0, 1)")
+plt.scatter(
+    [0],
+    [1],
+    label="Initial point (0, 1)"
+)
 
 plt.xlabel("x")
 plt.ylabel("y(x)")
@@ -158,5 +197,10 @@ plt.title("Nonhomogeneous ODE: Initial-Value Solution")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("nonhomogeneous_ode.png", dpi=300)
+
+plt.savefig(
+    IMAGE_DIR / "nonhomogeneous_ode.png",
+    dpi=300
+)
+
 plt.show()
