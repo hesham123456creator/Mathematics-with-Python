@@ -2,9 +2,9 @@
 
 ## Overview
 
-This folder contains symbolic solutions of ordinary differential equations (ODEs) using Python's **SymPy** library.
+This folder contains symbolic and numerical solutions of ordinary differential equations (ODEs) using Python's **SymPy**, **NumPy**, **SciPy**, and **Matplotlib** libraries.
 
-The projects demonstrate how computer algebra systems can solve first-order and second-order differential equations, determine general and particular solutions, apply initial conditions, and verify analytical results symbolically.
+The projects demonstrate how computer algebra systems can solve first-order and second-order differential equations, determine general and particular solutions, apply initial conditions, verify analytical results symbolically, and compare analytical solutions with numerical approximations.
 
 ## Projects
 
@@ -38,12 +38,50 @@ y''-3y'+2y=e^x.
 
 The program:
 
-- Determines the general solution.
+- Determines the general solution using SymPy.
 - Verifies the solution symbolically.
 - Applies two initial conditions.
 - Determines the integration constants.
-- Verifies the resulting particular solution.
-- Visualizes general and particular solutions.
+- Verifies the resulting particular solution and initial conditions.
+- Converts symbolic expressions into numerical functions using `sympy.lambdify()`.
+- Solves the initial-value problem numerically using SciPy's `solve_ivp()` with the RK45 method.
+- Compares the analytical and numerical solutions.
+- Calculates the maximum absolute numerical error.
+- Visualizes general solutions, the particular solution, and the analytical-versus-numerical comparison.
+
+For the initial conditions
+
+\[
+y(0)=1,\qquad y'(0)=0,
+\]
+
+the resulting particular solution is
+
+\[
+\boxed{y(x)=(1-x)e^x}.
+\]
+
+The numerical solution is computed over the interval \([0,3]\) using 300 evaluation points. With the selected solver tolerances, the maximum absolute error is approximately
+
+\[
+5.66\times10^{-8}.
+\]
+
+#### Generated Visualizations
+
+The program generates three plots, which are saved in the repository's `images/` directory.
+
+**General solution**
+
+![General solutions of the nonhomogeneous second-order ODE](../../images/nonhomogeneous_ode_general.png)
+
+**Particular solution**
+
+![Particular solution of the nonhomogeneous second-order ODE](../../images/nonhomogeneous_ode.png)
+
+**Analytical versus numerical solution**
+
+![Analytical and numerical solutions using RK45](../../images/nonhomogeneous_ode_comparison.png)
 
 ### 3. Homogeneous Second-Order Differential Equations
 
@@ -101,20 +139,23 @@ The projects cover:
 - General and particular solutions.
 - Initial-value problems.
 - Symbolic verification of analytical solutions.
-- Numerical evaluation and graphical visualization.
+- Numerical solution of ODEs using the RK45 method.
+- Error analysis and comparison of analytical and numerical solutions.
+- Graphical visualization of differential equation solutions.
 
 ## Python Libraries
 
 - **SymPy:** Symbolic mathematics, differentiation, equation solving, and analytical ODE solutions.
-- **NumPy:** Numerical evaluation of symbolic expressions.
-- **Matplotlib:** Visualization of mathematical solutions.
+- **NumPy:** Numerical evaluation of symbolic expressions and numerical data processing.
+- **SciPy:** Numerical integration of differential equations using `solve_ivp()`.
+- **Matplotlib:** Visualization of mathematical solutions and numerical comparisons.
 
 ## Installation
 
 Install the required libraries:
 
 ```bash
-pip install sympy numpy matplotlib
+pip install sympy numpy scipy matplotlib
 ```
 
 Alternatively, install all repository dependencies:
@@ -125,7 +166,7 @@ pip install -r requirements.txt
 
 ## Running the Programs
 
-Run the following commands from the repository root directory:
+Run the following commands from the repository root directory.
 
 **First-order ODE:**
 
@@ -157,8 +198,10 @@ These projects demonstrate how to:
 4. Solve initial-value problems.
 5. Verify analytical solutions by symbolic substitution.
 6. Analyze characteristic equations and their roots.
-7. Combine symbolic mathematics with numerical computation.
-8. Visualize families of differential equation solutions.
+7. Use SciPy to compute numerical solutions of ODEs.
+8. Compare analytical and numerical solutions.
+9. Evaluate numerical errors.
+10. Visualize families of differential equation solutions.
 
 ## Author
 

@@ -1,4 +1,11 @@
 
+"""
+Solve and visualize a nonhomogeneous second-order ODE using SymPy and SciPy.
+
+The script derives the symbolic solution, verifies initial conditions,
+and compares the exact solution with a numerical RK45 approximation.
+"""
+
 from pathlib import Path
 
 # Pylint does not fully recognize SymPy symbolic functions.
@@ -7,6 +14,7 @@ from pathlib import Path
 import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
 
 
 # Directory for generated plots
@@ -149,6 +157,50 @@ particular_function = sp.lambdify(
     modules="numpy"
 )
 
+# Numerical solution using SciPy's RK45 method
+
+
+def ode_system(x_value, state):
+    """Define the first-order system equivalent to the second-order ODE."""
+    y_value, dy_value = state
+
+    return [
+        dy_value,
+        3 * dy_value - 2 * y_value + np.exp(x_value)
+    ]
+
+
+numerical_solution = solve_ivp(
+    ode_system,
+    (0, 3),
+    [1, 0],
+    method="RK45",
+    t_eval=x_values,
+    rtol=1e-9,
+    atol=1e-11
+)
+
+if not numerical_solution.success:
+    raise RuntimeError(numerical_solution.message)
+
+
+# Compare numerical and analytical solutions
+
+exact_values = particular_function(x_values)
+numerical_values = numerical_solution.y[0]
+
+absolute_errors = np.abs(
+    numerical_values - exact_values
+)
+
+maximum_error = np.max(absolute_errors)
+
+print("\nNUMERICAL VERIFICATION")
+print("=" * 60)
+print("Numerical method: RK45")
+print("Number of evaluation points:", len(x_values))
+print(f"Maximum absolute error: {maximum_error:.6e}")
+
 
 # Plot several general solutions
 plt.figure(figsize=(9, 5))
@@ -202,5 +254,38 @@ plt.savefig(
     IMAGE_DIR / "nonhomogeneous_ode.png",
     dpi=300
 )
+
+
+# Compare analytical and numerical solutions
+
+plt.figure(figsize=(9, 5))
+
+plt.plot(
+    x_values,
+    exact_values,
+    label="Analytical solution",
+    linewidth=2
+)
+
+plt.plot(
+    numerical_solution.t,
+    numerical_values,
+    "--",
+    label="Numerical solution (RK45)",
+    linewidth=2
+)
+
+plt.xlabel("x")
+plt.ylabel("y(x)")
+plt.title("Analytical vs Numerical Solution")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+
+plt.savefig(
+    IMAGE_DIR / "nonhomogeneous_ode_comparison.png",
+    dpi=300
+)
+
 
 plt.show()
