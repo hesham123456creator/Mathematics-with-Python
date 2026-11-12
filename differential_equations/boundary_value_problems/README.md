@@ -99,6 +99,36 @@ The numerical solution is compared with an exact analytical solution.
 
 This example includes numerical error analysis, boundary condition verification, and differential equation residual checking.
 
+### 7. `nonlinear_bvp_parameter.py`
+
+Demonstrates the numerical solution of a nonlinear boundary value problem involving an unknown parameter:
+
+\[
+y''+\lambda y^2=0,
+\]
+
+subject to
+
+\[
+y(0)=0,\qquad y'(0)=1,\qquad y(1)=0.5.
+\]
+
+The unknown parameter is estimated using SciPy's `solve_bvp()` function.
+
+The computed parameter is approximately
+
+\[
+\lambda=8.551517046259.
+\]
+
+Features:
+- Simultaneous estimation of an unknown parameter and numerical solution.
+- Adaptive mesh refinement.
+- Collocation residual analysis.
+- Differential equation residual evaluation.
+- Boundary condition verification.
+- Numerical solution visualization.
+
 ## Numerical Methods and Tools
 
 The projects use the following methods and libraries:
@@ -107,6 +137,7 @@ The projects use the following methods and libraries:
 - Tridiagonal linear system solvers.
 - Numerical boundary value solvers.
 - Nonlinear differential equation solvers.
+- Parameter estimation in nonlinear BVPs.
 - Convergence and error analysis.
 - NumPy.
 - SciPy.
@@ -139,6 +170,7 @@ Through these projects, the repository demonstrates:
 - Use of SciPy for boundary value problems.
 - Comparison between numerical and analytical solutions.
 - Numerical accuracy and convergence analysis.
+- Estimation of unknown parameters in nonlinear differential equations.
 - Scientific visualization using Matplotlib.
 
 ## Author

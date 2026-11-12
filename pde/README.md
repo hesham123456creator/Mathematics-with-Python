@@ -1,6 +1,6 @@
 # Partial Differential Equations Using Python
 
-This directory contains Python implementations of numerical methods for solving partial differential equations (PDEs), with an emphasis on mathematical modeling, numerical stability, error analysis, and convergence.
+This directory contains Python implementations of numerical methods for solving partial differential equations (PDEs), with an emphasis on mathematical modeling, numerical stability, iterative methods, error analysis, and convergence.
 
 ## 1. Heat Diffusion Equation
 
@@ -63,17 +63,35 @@ For this explicit scheme, the stability condition is:
 0<r\leq\frac{1}{2}.
 \]
 
-## 3. Python Program
+## 3. Additional PDE Examples
+
+The directory also includes independent programs illustrating other PDE models and numerical approaches.
+
+| File | Description |
+|---|---|
+| `heat_equation.py` | Numerical solution of the one-dimensional heat equation using an explicit finite difference scheme. |
+| `laplace_equation.py` | Numerical solution of the two-dimensional Laplace equation using the Gauss-Seidel iterative method. |
+| `wave_equation.py` | Numerical solution of the one-dimensional wave equation using an explicit finite difference method. |
+| `compare_iterative_methods.py` | Comparison of Jacobi and Gauss-Seidel methods for solving a two-dimensional Laplace problem. |
+
+### Jacobi versus Gauss-Seidel
+
+The comparison program investigates two iterative methods for solving the discretized Laplace equation. It examines:
+
+- Number of iterations required for convergence.
+- Execution time.
+- Difference between the computed numerical solutions.
+
+The example illustrates that fewer iterations do not necessarily imply shorter execution time, since implementation and vectorization also affect computational performance.
+
+## 4. Advanced Heat Diffusion Project
 
 | File | Description |
 |---|---|
 | `heat_diffusion_project.py` | Numerical solution of the one-dimensional heat equation using FTCS, with analytical error verification and convergence analysis. |
 
-## 4. Numerical Analysis Features
+The advanced implementation includes:
 
-The implementation includes:
-
-- Explicit finite difference discretization.
 - Stability condition verification.
 - Vectorized numerical computation using NumPy.
 - Comparison with the exact analytical solution.
@@ -86,35 +104,52 @@ The implementation includes:
 ## 5. Required Libraries
 
 - NumPy
+- SciPy
 - Matplotlib
 
 Install the required libraries using:
 
 ```bash
-pip install numpy matplotlib
+pip install numpy scipy matplotlib
 ```
 
-Run the program using:
+## 6. Running the Programs
+
+From the repository root, run the individual programs using:
 
 ```bash
-python heat_diffusion_project.py
+python pde/heat_equation.py
+python pde/laplace_equation.py
+python pde/wave_equation.py
+python pde/compare_iterative_methods.py
+python pde/heat_diffusion_project.py
 ```
 
-## 6. Expected Output
+## 7. Expected Output
 
-The program generates three figures:
+The programs generate numerical results and visualizations illustrating:
+
+- Heat distribution over time.
+- Numerical solutions of Laplace's equation.
+- Wave propagation.
+- Convergence behavior of iterative methods.
+- Numerical errors and convergence rates for the heat diffusion problem.
+
+The advanced heat diffusion project generates three figures:
 
 1. `heat_diffusion_evolution.png` – comparison of numerical and exact temperature distributions at selected times.
 2. `heat_diffusion_error.png` – absolute numerical error at the final time.
 3. `heat_diffusion_convergence.png` – log-log convergence plot showing how numerical error changes with grid spacing.
 
-## 7. Learning Outcomes
+## 8. Learning Outcomes
 
 This project demonstrates practical skills in:
 
 - Numerical solutions of partial differential equations.
 - Finite difference methods.
 - Stability analysis of explicit numerical schemes.
+- Iterative methods for elliptic PDEs.
+- Comparison of numerical algorithms.
 - Error estimation and convergence analysis.
 - Scientific programming and visualization using Python.
 
