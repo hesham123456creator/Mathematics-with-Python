@@ -99,7 +99,94 @@ The numerical solution is compared with an exact analytical solution.
 
 This example includes numerical error analysis, boundary condition verification, and differential equation residual checking.
 
-### 7. `nonlinear_bvp_parameter.py`
+### 7. `bratu_parameter_study.py`
+
+Investigates both analytical solution branches of the nonlinear Bratu boundary value problem:
+
+\[
+y''+\lambda e^y=0,
+\]
+
+subject to
+
+\[
+y(0)=0,\qquad y(1)=0.
+\]
+
+The study considers four parameter values:
+
+\[
+\lambda=1.0,\quad 2.0,\quad 3.0,\quad 3.5.
+\]
+
+For each parameter value below the critical value, two distinct positive solutions exist: a lower branch and an upper branch.
+
+The critical parameter is approximately
+
+\[
+\lambda_c=3.5138307191.
+\]
+
+The numerical solutions obtained using SciPy's `solve_bvp()` are compared with the exact analytical solutions.
+
+Features:
+- Computation of both analytical solution branches.
+- Numerical branch tracking using suitable initial guesses.
+- Critical parameter estimation using `brentq()`.
+- Maximum absolute error analysis.
+- Differential equation residual evaluation.
+- Collocation RMS residual analysis.
+- Comparison of both branches through scientific visualization.
+
+The resulting plot is saved as:
+
+`images/bratu_parameter_study.png`
+
+The numerical results demonstrate excellent accuracy, with maximum absolute errors below \(1.1\times10^{-10}\).
+Investigates both analytical solution branches of the nonlinear Bratu boundary value problem:
+
+\[
+y''+\lambda e^y=0,
+\]
+
+subject to
+
+\[
+y(0)=0,\qquad y(1)=0.
+\]
+
+The study considers four parameter values:
+
+\[
+\lambda=1.0,\quad 2.0,\quad 3.0,\quad 3.5.
+\]
+
+For each parameter value below the critical value, two distinct positive solutions exist: a lower branch and an upper branch.
+
+The critical parameter is approximately
+
+\[
+\lambda_c=3.5138307191.
+\]
+
+The numerical solutions obtained using SciPy's `solve_bvp()` are compared with the exact analytical solutions.
+
+Features:
+- Computation of both analytical solution branches.
+- Numerical branch tracking using suitable initial guesses.
+- Critical parameter estimation using `brentq()`.
+- Maximum absolute error analysis.
+- Differential equation residual evaluation.
+- Collocation RMS residual analysis.
+- Comparison of both branches through scientific visualization.
+
+The resulting plot is saved as:
+
+`images/bratu_parameter_study.png`
+
+The numerical results demonstrate excellent accuracy, with maximum absolute errors below \(1.1\times10^{-10}\).
+
+### 8. `nonlinear_bvp_parameter.py`
 
 Demonstrates the numerical solution of a nonlinear boundary value problem involving an unknown parameter:
 
