@@ -105,7 +105,7 @@ maximum_error = np.max(
 left_residual = abs(y_numerical[0])
 right_residual = abs(y_numerical[-1])
 
-# Differential equation residual
+# ODE residual at plotting points
 solution_derivative = solution.sol(x_plot, 1)
 
 ode_residual = np.max(
@@ -115,6 +115,24 @@ ode_residual = np.max(
     )
 )
 
+# ODE residual at solver mesh points
+y_mesh = solution.sol(solution.x)
+
+second_derivative_mesh = solution.sol(
+    solution.x, 2
+)[1]
+
+mesh_residual = np.max(
+    np.abs(
+        second_derivative_mesh
+        + lam * np.exp(y_mesh[0])
+    )
+)
+
+# Maximum interval-wise RMS residual
+scipy_rms_residual = np.max(
+    solution.rms_residuals
+)
 
 # --------------------------------------------------
 # 6. Display numerical results
@@ -134,7 +152,13 @@ print("Number of mesh points:", solution.x.size)
 print("\nAccuracy Analysis")
 print(f"Maximum solution value: {np.max(y_numerical):.10f}")
 print(f"Maximum absolute error: {maximum_error:.10e}")
-print(f"ODE residual: {ode_residual:.10e}")
+print(f"ODE residual (plot points): {ode_residual:.10e}")
+print(f"ODE residual (mesh points): {mesh_residual:.10e}")
+
+print(
+    f"Maximum SciPy RMS residual: "
+    f"{np.max(solution.rms_residuals):.10e}"
+)
 
 print("\nBoundary Conditions")
 print(f"y(0): {y_numerical[0]:.10e}")
