@@ -113,13 +113,16 @@ subject to
 y(0)=0,\qquad y(1)=0.
 \]
 
-The study considers four parameter values:
+The study considers eleven parameter values:
 
 \[
-\lambda=1.0,\quad 2.0,\quad 3.0,\quad 3.5.
+\begin{aligned}
+\lambda\in\{&1.0,\ 2.0,\ 3.0,\ 3.3,\ 3.4,\\
+&3.45,\ 3.48,\ 3.50,\ 3.51,\ 3.513,\ 3.5135\}.
+\end{aligned}
 \]
 
-For each parameter value below the critical value, two distinct positive solutions exist: a lower branch and an upper branch.
+For each parameter value below the critical value, two distinct positive solutions exist: a lower branch and an upper branch. These branches approach each other as the parameter approaches the critical value, where they merge in a saddle-node (fold) bifurcation.
 
 The critical parameter is approximately
 
@@ -129,62 +132,21 @@ The critical parameter is approximately
 
 The numerical solutions obtained using SciPy's `solve_bvp()` are compared with the exact analytical solutions.
 
-Features:
+**Features:**
 - Computation of both analytical solution branches.
 - Numerical branch tracking using suitable initial guesses.
 - Critical parameter estimation using `brentq()`.
 - Maximum absolute error analysis.
 - Differential equation residual evaluation.
-- Collocation RMS residual analysis.
-- Comparison of both branches through scientific visualization.
+- Investigation of both solution branches near the critical parameter.
+- Bifurcation diagram showing the maximum solution value against the parameter.
 
-The resulting plot is saved as:
+**Generated figures:**
 
-`images/bratu_parameter_study.png`
+![Bratu solution branches](../../images/bratu_bifurcation_study.png)
 
-The numerical results demonstrate excellent accuracy, with maximum absolute errors below \(1.1\times10^{-10}\).
-Investigates both analytical solution branches of the nonlinear Bratu boundary value problem:
+![Bratu bifurcation diagram](../../images/bratu_bifurcation_diagram.png)
 
-\[
-y''+\lambda e^y=0,
-\]
-
-subject to
-
-\[
-y(0)=0,\qquad y(1)=0.
-\]
-
-The study considers four parameter values:
-
-\[
-\lambda=1.0,\quad 2.0,\quad 3.0,\quad 3.5.
-\]
-
-For each parameter value below the critical value, two distinct positive solutions exist: a lower branch and an upper branch.
-
-The critical parameter is approximately
-
-\[
-\lambda_c=3.5138307191.
-\]
-
-The numerical solutions obtained using SciPy's `solve_bvp()` are compared with the exact analytical solutions.
-
-Features:
-- Computation of both analytical solution branches.
-- Numerical branch tracking using suitable initial guesses.
-- Critical parameter estimation using `brentq()`.
-- Maximum absolute error analysis.
-- Differential equation residual evaluation.
-- Collocation RMS residual analysis.
-- Comparison of both branches through scientific visualization.
-
-The resulting plot is saved as:
-
-`images/bratu_parameter_study.png`
-
-The numerical results demonstrate excellent accuracy, with maximum absolute errors below \(1.1\times10^{-10}\).
 
 ### 8. `nonlinear_bvp_parameter.py`
 

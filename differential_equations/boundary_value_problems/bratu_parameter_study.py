@@ -24,7 +24,19 @@ critical_lambda = (
 print(f"Critical lambda: {critical_lambda:.10f}")
 
 # Values below the critical parameter
-lambda_values = [1.0, 2.0, 3.0, 3.5]
+lambda_values = [
+    1.0,
+    2.0,
+    3.0,
+    3.3,
+    3.4,
+    3.45,
+    3.48,
+    3.50,
+    3.51,
+    3.513,
+    3.5135
+]
 
 x = np.linspace(0, 1, 100)
 x_plot = np.linspace(0, 1, 300)
@@ -157,7 +169,7 @@ print("\nBratu Parameter Study")
 print("=" * 105)
 
 print(
-    f"{'Lambda':>8} {'Branch':>9} {'a':>10} "
+    f"{'Lambda':>10} {'Branch':>9} {'a':>10} "
     f"{'Maximum y':>12} {'Max Error':>14} "
     f"{'ODE Residual':>14} {'RMS Residual':>14} {'Nodes':>7}"
 )
@@ -166,7 +178,7 @@ for row in results:
     lam, branch, a, ymax, error, residual, rms, nodes = row
 
     print(
-        f"{lam:8.2f} {branch:>9} {a:10.6f} "
+        f"{lam:10.5f} {branch:>9} {a:10.6f} "
         f"{ymax:12.6f} {error:14.3e} "
         f"{residual:14.3e} {rms:14.3e} {nodes:7d}"
     )
@@ -183,7 +195,62 @@ plt.grid(True)
 plt.tight_layout()
 
 plt.savefig(
-    "images/bratu_parameter_study.png",
+    "images/bratu_bifurcation_study.png",
+    dpi=300
+)
+
+plt.show()
+plt.close()
+# --------------------------------------------------
+# Bifurcation Diagram
+# --------------------------------------------------
+
+plt.figure(figsize=(9, 6))
+
+for branch in ["Lower", "Upper"]:
+
+    branch_results = [
+        row for row in results if row[1] == branch
+    ]
+
+    lambda_values = [row[0] for row in branch_results]
+    maximum_values = [row[3] for row in branch_results]
+
+    plt.plot(
+        lambda_values,
+        maximum_values,
+        marker="o",
+        linewidth=2,
+        label=f"{branch} branch"
+    )
+
+# Critical point
+critical_y = 2 * np.log(np.cosh(critical_a / 2))
+
+plt.plot(
+    critical_lambda,
+    critical_y,
+    "r*",
+    markersize=14,
+    label="Critical point"
+)
+
+plt.axvline(
+    critical_lambda,
+    color="gray",
+    linestyle="--",
+    alpha=0.7
+)
+
+plt.xlabel("Parameter lambda")
+plt.ylabel("Maximum solution value")
+plt.title("Bratu Problem: Bifurcation Diagram")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+
+plt.savefig(
+    "images/bratu_bifurcation_diagram.png",
     dpi=300
 )
 
