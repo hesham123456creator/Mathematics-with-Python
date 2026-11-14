@@ -1,4 +1,3 @@
-# Partial Differential Equations Using Python
 
 This directory contains Python implementations of numerical methods for solving partial differential equations (PDEs), with an emphasis on mathematical modeling, numerical stability, iterative methods, error analysis, and convergence.
 
@@ -72,6 +71,7 @@ The directory also includes independent programs illustrating other PDE models a
 | `heat_equation.py` | Numerical solution of the one-dimensional heat equation using an explicit finite difference scheme. |
 | `heat_equation_2d.py` | Numerical solution of the two-dimensional heat equation using an explicit FTCS scheme, with accuracy and convergence analysis. 
 | `laplace_equation.py` | Numerical solution of the two-dimensional Laplace equation using the Gauss-Seidel method, with analytical solution comparison, error analysis, and grid convergence study. |
+| `poisson_equation.py` | Numerical solution of the two-dimensional Poisson equation using the Gauss-Seidel method, with exact solution comparison, error analysis, and grid convergence study. |
 | `wave_equation.py` | Numerical solution of the one-dimensional wave equation using an explicit finite difference method. |
 | `wave_equation_2d.py` | Numerical solution of the two-dimensional wave equation using an explicit finite difference scheme, with accuracy and convergence analysis. |
 | `compare_iterative_methods.py` | Comparison of Jacobi and Gauss-Seidel methods for solving a two-dimensional Laplace problem. |
@@ -413,8 +413,76 @@ The program generates five figures:
 4. `laplace_equation_2d_error.png` – absolute error distribution.
 5. `laplace_equation_2d_convergence.png` – log-log grid convergence plot.
 
+## 9. Two-Dimensional Poisson Equation
 
-## 9. Required Libraries
+The project solves the two-dimensional Poisson equation on the unit square:
+
+\[
+\frac{\partial^2 u}{\partial x^2}
++
+\frac{\partial^2 u}{\partial y^2}
+=
+-2\pi^2\sin(\pi x)\sin(\pi y),
+\qquad 0 < x,y < 1.
+\]
+
+### Boundary Conditions and Exact Solution
+
+Homogeneous Dirichlet boundary conditions are imposed on all four boundaries:
+
+\[
+u(0,y)=u(1,y)=u(x,0)=u(x,1)=0.
+\]
+
+The exact analytical solution is:
+
+\[
+u(x,y)=\sin(\pi x)\sin(\pi y).
+\]
+
+### Numerical Method
+
+The equation is discretized using the central finite difference method and solved iteratively using the Gauss-Seidel method.
+
+The implementation includes:
+- Numerical solution of the two-dimensional Poisson equation.
+- Comparison with the exact analytical solution.
+- Maximum absolute error and root mean square error calculations.
+- Grid refinement and convergence analysis.
+- Observed convergence order calculation.
+- Two-dimensional solution and error visualizations.
+
+### Numerical Results
+
+For a grid of \(30\times30\), the numerical results are:
+
+| Quantity | Result |
+|---|---:|
+| Number of iterations | 1267 |
+| Final maximum change | 9.9994056368e-09 |
+| Maximum absolute error | 9.1344837556e-04 |
+| Root mean square error | 4.4199076107e-04 |
+
+### Grid Convergence Study
+
+| Grid | Maximum Error | RMSE | Observed Order |
+|---:|---:|---:|---:|
+| 10 × 10 | 8.2653264445e-03 | 3.7569662263e-03 | --- |
+| 20 × 20 | 2.0583164643e-03 | 9.8015032427e-04 | 2.0056 |
+| 30 × 30 | 9.1344837556e-04 | 4.4199076107e-04 | 2.0037 |
+| 40 × 40 | 5.1259374355e-04 | 2.5004533914e-04 | 2.0083 |
+
+The observed convergence orders confirm approximately second-order accuracy of the finite difference discretization.
+
+### Generated Figures
+
+1. `poisson_equation_2d_numerical.png` – numerical solution.
+2. `poisson_equation_2d_exact.png` – exact analytical solution.
+3. `poisson_equation_2d_contour.png` – contour representation of the numerical solution.
+4. `poisson_equation_2d_error.png` – absolute error distribution.
+5. `poisson_equation_2d_convergence.png` – grid refinement and convergence analysis.
+
+## 10. Required Libraries
 
 - NumPy
 - SciPy
@@ -426,7 +494,7 @@ Install the required libraries using:
 pip install numpy scipy matplotlib
 ```
 
-## 10. Running the Programs
+## 11. Running the Programs
 
 From the repository root, run the individual programs using:
 
@@ -440,7 +508,7 @@ python pde/compare_iterative_methods.py
 python pde/heat_diffusion_project.py
 ```
 
-## 11. Expected Output
+## 12. Expected Output
 
 The programs generate numerical results and visualizations illustrating:
 
@@ -483,7 +551,7 @@ The two-dimensional Laplace equation program generates five figures:
 4. `laplace_equation_2d_error.png` – spatial distribution of the absolute numerical error.
 5. `laplace_equation_2d_convergence.png` – log-log convergence plot for the grid refinement study.
 
-## 12. Learning Outcomes
+## 13. Learning Outcomes
 
 This project demonstrates practical skills in:
 
