@@ -71,7 +71,7 @@ The directory also includes independent programs illustrating other PDE models a
 |---|---|
 | `heat_equation.py` | Numerical solution of the one-dimensional heat equation using an explicit finite difference scheme. |
 | `heat_equation_2d.py` | Numerical solution of the two-dimensional heat equation using an explicit FTCS scheme, with accuracy and convergence analysis. 
-| `laplace_equation.py` | Numerical solution of the two-dimensional Laplace equation using the Gauss-Seidel iterative method. |
+| `laplace_equation.py` | Numerical solution of the two-dimensional Laplace equation using the Gauss-Seidel method, with analytical solution comparison, error analysis, and grid convergence study. |
 | `wave_equation.py` | Numerical solution of the one-dimensional wave equation using an explicit finite difference method. |
 | `wave_equation_2d.py` | Numerical solution of the two-dimensional wave equation using an explicit finite difference scheme, with accuracy and convergence analysis. |
 | `compare_iterative_methods.py` | Comparison of Jacobi and Gauss-Seidel methods for solving a two-dimensional Laplace problem. |
@@ -325,7 +325,96 @@ The program generates four figures:
 3. `wave_equation_2d_error.png` – spatial distribution of absolute numerical error.
 4. `wave_equation_2d_convergence.png` – log-log grid refinement and convergence plot.
 
-## 8. Required Libraries
+
+## 8. Two-Dimensional Laplace Equation
+
+The project considers the two-dimensional Laplace equation:
+
+\[
+\frac{\partial^2 u}{\partial x^2}
++
+\frac{\partial^2 u}{\partial y^2}=0,
+\qquad 0<x,y<1.
+\]
+
+The computational domain is the unit square, with the following Dirichlet boundary conditions:
+
+\[
+u(x,0)=0,\qquad u(x,1)=\sin(\pi x),
+\]
+
+\[
+u(0,y)=u(1,y)=0.
+\]
+
+### Analytical Solution
+
+The exact analytical solution is:
+
+\[
+u(x,y)=
+\frac{\sinh(\pi y)}{\sinh(\pi)}
+\sin(\pi x).
+\]
+
+### Numerical Method
+
+The equation is discretized using the central finite difference method and solved iteratively using the Gauss-Seidel method.
+
+The finite difference formula is:
+
+\[
+u_{i,j}=
+\frac{
+\Delta y^2(u_{i+1,j}+u_{i-1,j})
++
+\Delta x^2(u_{i,j+1}+u_{i,j-1})
+}{
+2(\Delta x^2+\Delta y^2)
+}.
+\]
+
+### Accuracy and Convergence Analysis
+
+The implementation includes:
+
+- Gauss-Seidel iterative solver.
+- Convergence tolerance verification.
+- Comparison with the exact analytical solution.
+- Maximum absolute error calculation.
+- Root mean square error calculation.
+- Grid refinement study.
+- Observed convergence order calculation.
+- Three-dimensional surface and contour visualizations.
+- Absolute error distribution.
+
+The numerical solution on the \(30\times30\) grid converges in 1170 iterations, with a tolerance of \(10^{-8}\).
+
+The maximum absolute error is approximately \(3.1591\times10^{-4}\), and the RMSE is approximately \(1.4849\times10^{-4}\).
+
+### Grid Convergence Study
+
+| Grid N | Maximum error | RMSE | Observed order |
+|---:|---:|---:|---:|
+| 10 | 2.8260e-03 | 1.2486e-03 | --- |
+| 20 | 7.1115e-04 | 3.2912e-04 | 1.9905 |
+| 30 | 3.1591e-04 | 1.4849e-04 | 2.0012 |
+| 40 | 1.7691e-04 | 8.3738e-05 | 2.0155 |
+
+The numerical results confirm approximately second-order convergence.
+
+### Generated Figures
+
+The program generates five figures:
+
+1. `laplace_equation_2d_numerical.png` – three-dimensional numerical solution.
+2. `laplace_equation_2d_exact.png` – three-dimensional analytical solution.
+3. `laplace_equation_2d_contour.png` – numerical temperature distribution.
+4. `laplace_equation_2d_error.png` – absolute error distribution.
+5. `laplace_equation_2d_convergence.png` – log-log grid convergence plot.
+
+
+## 9. Required Libraries
 
 - NumPy
 - SciPy
@@ -337,7 +426,7 @@ Install the required libraries using:
 pip install numpy scipy matplotlib
 ```
 
-## 9. Running the Programs
+## 10. Running the Programs
 
 From the repository root, run the individual programs using:
 
@@ -351,7 +440,7 @@ python pde/compare_iterative_methods.py
 python pde/heat_diffusion_project.py
 ```
 
-## 10. Expected Output
+## 11. Expected Output
 
 The programs generate numerical results and visualizations illustrating:
 
@@ -386,7 +475,15 @@ The two-dimensional wave equation program generates four figures:
 3. `wave_equation_2d_error.png` – spatial distribution of absolute numerical error.
 4. `wave_equation_2d_convergence.png` – log-log convergence plot for the grid refinement study.
 
-## 11. Learning Outcomes
+The two-dimensional Laplace equation program generates five figures:
+
+1. `laplace_equation_2d_numerical.png` – three-dimensional surface plot of the numerical solution.
+2. `laplace_equation_2d_exact.png` – three-dimensional surface plot of the exact analytical solution.
+3. `laplace_equation_2d_contour.png` – contour plot of the numerical solution.
+4. `laplace_equation_2d_error.png` – spatial distribution of the absolute numerical error.
+5. `laplace_equation_2d_convergence.png` – log-log convergence plot for the grid refinement study.
+
+## 12. Learning Outcomes
 
 This project demonstrates practical skills in:
 
