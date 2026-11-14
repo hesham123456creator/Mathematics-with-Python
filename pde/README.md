@@ -73,6 +73,7 @@ The directory also includes independent programs illustrating other PDE models a
 | `heat_equation_2d.py` | Numerical solution of the two-dimensional heat equation using an explicit FTCS scheme, with accuracy and convergence analysis. 
 | `laplace_equation.py` | Numerical solution of the two-dimensional Laplace equation using the Gauss-Seidel iterative method. |
 | `wave_equation.py` | Numerical solution of the one-dimensional wave equation using an explicit finite difference method. |
+| `wave_equation_2d.py` | Numerical solution of the two-dimensional wave equation using an explicit finite difference scheme, with accuracy and convergence analysis. |
 | `compare_iterative_methods.py` | Comparison of Jacobi and Gauss-Seidel methods for solving a two-dimensional Laplace problem. |
 
 ### Jacobi versus Gauss-Seidel
@@ -242,7 +243,89 @@ The wave equation program generates:
 1. `wave_equation_comparison.png` – comparison of numerical and exact wave solutions.
 2. `wave_equation_convergence.png` – convergence behavior under successive grid refinements.
 
-## 7. Required Libraries
+
+## 7. Two-Dimensional Wave Equation
+
+The project also considers the two-dimensional wave equation:
+
+\[
+\frac{\partial^2 u}{\partial t^2}
+=
+c^2\left(
+\frac{\partial^2 u}{\partial x^2}
++
+\frac{\partial^2 u}{\partial y^2}
+\right),
+\qquad 0 < x,y < 1,\quad t > 0.
+\]
+
+The initial displacement is:
+
+\[
+u(x,y,0)=\sin(\pi x)\sin(\pi y),
+\]
+
+with zero initial velocity and homogeneous Dirichlet boundary conditions.
+
+The exact solution is:
+
+\[
+u(x,y,t)=
+\sin(\pi x)\sin(\pi y)
+\cos(\sqrt{2}\pi ct).
+\]
+
+### Numerical Method
+
+The equation is solved using an explicit central finite difference scheme in space and time:
+
+\[
+\begin{aligned}
+u_{i,j}^{n+1}
+={}&2u_{i,j}^{n}-u_{i,j}^{n-1}\\
+&+r_x^2(u_{i+1,j}^{n}-2u_{i,j}^{n}+u_{i-1,j}^{n})\\
+&+r_y^2(u_{i,j+1}^{n}-2u_{i,j}^{n}+u_{i,j-1}^{n}),
+\end{aligned}
+\]
+
+where:
+
+\[
+r_x=\frac{c\Delta t}{\Delta x},
+\qquad
+r_y=\frac{c\Delta t}{\Delta y}.
+\]
+
+The stability condition is:
+
+\[
+r_x^2+r_y^2\leq 1.
+\]
+
+### Accuracy and Convergence Analysis
+
+The implementation includes:
+- Stability condition verification.
+- Numerical and exact solution comparison.
+- Maximum absolute error calculation.
+- Mean absolute error and RMS error calculations.
+- Grid refinement study.
+- Observed convergence order calculation.
+
+For the \(50\times50\) grid, the stability parameter is \(0.78125\), satisfying the stability condition. The maximum absolute error is approximately \(2.48\times10^{-5}\).
+
+The grid refinement study confirms approximately second-order convergence on finer grids.
+
+### Generated Figures
+
+The program generates four figures:
+
+1. `wave_equation_2d_solution.png` – three-dimensional surface plot of the numerical solution.
+2. `wave_equation_2d_comparison.png` – comparison of numerical and exact solutions.
+3. `wave_equation_2d_error.png` – spatial distribution of absolute numerical error.
+4. `wave_equation_2d_convergence.png` – log-log grid refinement and convergence plot.
+
+## 8. Required Libraries
 
 - NumPy
 - SciPy
@@ -254,7 +337,7 @@ Install the required libraries using:
 pip install numpy scipy matplotlib
 ```
 
-## 8. Running the Programs
+## 9. Running the Programs
 
 From the repository root, run the individual programs using:
 
@@ -263,11 +346,12 @@ python pde/heat_equation.py
 python pde/heat_equation_2d.py
 python pde/laplace_equation.py
 python pde/wave_equation.py
+python pde/wave_equation_2d.py
 python pde/compare_iterative_methods.py
 python pde/heat_diffusion_project.py
 ```
 
-## 9. Expected Output
+## 10. Expected Output
 
 The programs generate numerical results and visualizations illustrating:
 
@@ -295,7 +379,14 @@ The two-dimensional heat equation program generates four figures:
 3. `heat_equation_2d_error.png` – absolute error between numerical and exact solutions.
 4. `heat_equation_2d_convergence.png` – log-log convergence plot for the grid refinement study.
 
-## 10. Learning Outcomes
+The two-dimensional wave equation program generates four figures:
+
+1. `wave_equation_2d_solution.png` – three-dimensional surface plot of the numerical wave solution.
+2. `wave_equation_2d_comparison.png` – comparison of numerical and exact wave solutions.
+3. `wave_equation_2d_error.png` – spatial distribution of absolute numerical error.
+4. `wave_equation_2d_convergence.png` – log-log convergence plot for the grid refinement study.
+
+## 11. Learning Outcomes
 
 This project demonstrates practical skills in:
 
