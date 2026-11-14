@@ -101,7 +101,69 @@ The advanced implementation includes:
 - Observed convergence order calculation.
 - High-resolution plot generation.
 
-## 5. Required Libraries
+## 5. Wave Equation
+
+The project also considers the one-dimensional wave equation:
+
+\[
+\frac{\partial^2 u}{\partial t^2}
+=
+c^2\frac{\partial^2 u}{\partial x^2},
+\qquad 0 < x < L,\quad t > 0.
+\]
+
+where:
+- \(u(x,t)\) represents the wave displacement.
+- \(c\) is the wave propagation speed.
+- \(x\) is the spatial variable.
+- \(t\) is time.
+
+### Numerical Method
+
+The wave equation is solved using an explicit central finite difference scheme:
+
+\[
+u_i^{n+1}
+=
+2u_i^n-u_i^{n-1}
++r^2(u_{i+1}^n-2u_i^n+u_{i-1}^n),
+\]
+
+where:
+
+\[
+r=\frac{c\Delta t}{\Delta x}.
+\]
+
+The stability condition for this scheme is:
+
+\[
+0<r\leq 1.
+\]
+
+### Accuracy and Convergence Analysis
+
+The implementation includes:
+- Stability parameter verification.
+- Numerical accuracy analysis.
+- Maximum absolute error calculation.
+- Root mean square error calculation.
+- Grid refinement study.
+- Observed convergence order calculation.
+- Visualization of numerical and exact solutions.
+
+The numerical experiment gives a stability parameter of approximately \(0.9091\).
+
+The grid refinement study demonstrates second-order convergence, with an observed order approaching \(2\).
+
+### Generated Figures
+
+The wave equation program generates:
+
+1. `wave_equation_comparison.png` – comparison of numerical and exact wave solutions.
+2. `wave_equation_convergence.png` – convergence behavior under successive grid refinements.
+
+## 6. Required Libraries
 
 - NumPy
 - SciPy
@@ -113,7 +175,7 @@ Install the required libraries using:
 pip install numpy scipy matplotlib
 ```
 
-## 6. Running the Programs
+## 7. Running the Programs
 
 From the repository root, run the individual programs using:
 
@@ -125,7 +187,7 @@ python pde/compare_iterative_methods.py
 python pde/heat_diffusion_project.py
 ```
 
-## 7. Expected Output
+## 8. Expected Output
 
 The programs generate numerical results and visualizations illustrating:
 
@@ -141,7 +203,12 @@ The advanced heat diffusion project generates three figures:
 2. `heat_diffusion_error.png` – absolute numerical error at the final time.
 3. `heat_diffusion_convergence.png` – log-log convergence plot showing how numerical error changes with grid spacing.
 
-## 8. Learning Outcomes
+The wave equation program generates two figures:
+
+1. `wave_equation_comparison.png` – comparison of numerical and exact wave solutions.
+2. `wave_equation_convergence.png` – convergence plot showing the numerical error as the spatial grid is refined.
+
+## 9. Learning Outcomes
 
 This project demonstrates practical skills in:
 
