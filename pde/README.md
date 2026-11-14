@@ -70,6 +70,7 @@ The directory also includes independent programs illustrating other PDE models a
 | File | Description |
 |---|---|
 | `heat_equation.py` | Numerical solution of the one-dimensional heat equation using an explicit finite difference scheme. |
+| `heat_equation_2d.py` | Numerical solution of the two-dimensional heat equation using an explicit FTCS scheme, with accuracy and convergence analysis. 
 | `laplace_equation.py` | Numerical solution of the two-dimensional Laplace equation using the Gauss-Seidel iterative method. |
 | `wave_equation.py` | Numerical solution of the one-dimensional wave equation using an explicit finite difference method. |
 | `compare_iterative_methods.py` | Comparison of Jacobi and Gauss-Seidel methods for solving a two-dimensional Laplace problem. |
@@ -101,7 +102,85 @@ The advanced implementation includes:
 - Observed convergence order calculation.
 - High-resolution plot generation.
 
-## 5. Wave Equation
+
+## 5. Two-Dimensional Heat Equation
+
+The project includes a numerical implementation of the two-dimensional heat diffusion equation:
+
+\[
+\frac{\partial u}{\partial t}
+=
+\alpha\left(
+\frac{\partial^2u}{\partial x^2}
++
+\frac{\partial^2u}{\partial y^2}
+\right).
+\]
+
+The computational domain is \(0\leq x,y\leq 1\), with homogeneous Dirichlet boundary conditions on all four edges.
+
+### Initial Condition and Exact Solution
+
+The initial temperature distribution is:
+
+\[
+u(x,y,0)=\sin(\pi x)\sin(\pi y).
+\]
+
+The exact analytical solution is:
+
+\[
+u(x,y,t)=e^{-2\alpha\pi^2t}
+\sin(\pi x)\sin(\pi y).
+\]
+
+### Numerical Method
+
+The equation is solved using the explicit Forward-Time Central-Space (FTCS) finite difference method.
+
+The stability parameters are:
+
+\[
+r_x=\frac{\alpha\Delta t}{\Delta x^2},
+\qquad
+r_y=\frac{\alpha\Delta t}{\Delta y^2}.
+\]
+
+The stability condition is:
+
+\[
+r_x+r_y\leq\frac12.
+\]
+
+### Accuracy and Convergence Analysis
+
+The implementation includes:
+- Stability verification.
+- Comparison with the exact analytical solution.
+- Maximum, mean, and RMS error calculations.
+- Spatial grid refinement.
+- Observed convergence order calculation.
+- Two-dimensional temperature visualization.
+
+The grid refinement study produces the following results:
+
+| Grid N | Grid spacing | Maximum error | Observed order |
+|---:|---:|---:|---:|
+| 25 | 0.040 | 8.2072e-04 | --- |
+| 50 | 0.020 | 2.0560e-04 | 1.9971 |
+| 100 | 0.010 | 5.1412e-05 | 1.9997 |
+| 200 | 0.005 | 1.2858e-05 | 1.9994 |
+
+The numerical results confirm second-order spatial convergence.
+
+### Generated Figures
+
+1. `heat_equation_2d_solution.png` – two-dimensional numerical temperature distribution.
+2. `heat_equation_2d_comparison.png` – comparison between numerical and exact solutions.
+3. `heat_equation_2d_error.png` – spatial distribution of absolute numerical error.
+4. `heat_equation_2d_convergence.png` – log-log grid refinement and convergence plot.
+
+## 6. Wave Equation
 
 The project also considers the one-dimensional wave equation:
 
@@ -163,7 +242,7 @@ The wave equation program generates:
 1. `wave_equation_comparison.png` – comparison of numerical and exact wave solutions.
 2. `wave_equation_convergence.png` – convergence behavior under successive grid refinements.
 
-## 6. Required Libraries
+## 7. Required Libraries
 
 - NumPy
 - SciPy
@@ -175,19 +254,20 @@ Install the required libraries using:
 pip install numpy scipy matplotlib
 ```
 
-## 7. Running the Programs
+## 8. Running the Programs
 
 From the repository root, run the individual programs using:
 
 ```bash
 python pde/heat_equation.py
+python pde/heat_equation_2d.py
 python pde/laplace_equation.py
 python pde/wave_equation.py
 python pde/compare_iterative_methods.py
 python pde/heat_diffusion_project.py
 ```
 
-## 8. Expected Output
+## 9. Expected Output
 
 The programs generate numerical results and visualizations illustrating:
 
@@ -208,7 +288,14 @@ The wave equation program generates two figures:
 1. `wave_equation_comparison.png` – comparison of numerical and exact wave solutions.
 2. `wave_equation_convergence.png` – convergence plot showing the numerical error as the spatial grid is refined.
 
-## 9. Learning Outcomes
+The two-dimensional heat equation program generates four figures:
+
+1. `heat_equation_2d_solution.png` – numerical temperature distribution over the two-dimensional domain.
+2. `heat_equation_2d_comparison.png` – comparison of numerical and exact temperature distributions.
+3. `heat_equation_2d_error.png` – absolute error between numerical and exact solutions.
+4. `heat_equation_2d_convergence.png` – log-log convergence plot for the grid refinement study.
+
+## 10. Learning Outcomes
 
 This project demonstrates practical skills in:
 
