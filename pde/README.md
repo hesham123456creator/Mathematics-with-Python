@@ -75,6 +75,8 @@ The directory also includes independent programs illustrating other PDE models a
 | `wave_equation.py` | Numerical solution of the one-dimensional wave equation using an explicit finite difference method. |
 | `wave_equation_2d.py` | Numerical solution of the two-dimensional wave equation using an explicit finite difference scheme, with accuracy and convergence analysis. |
 | `compare_iterative_methods.py` | Comparison of Jacobi and Gauss-Seidel methods for solving a two-dimensional Laplace problem. |
+| `jacobi_poisson.py` | Numerical solution of the two-dimensional Poisson equation using the Jacobi iterative method. |
+| `compare_jacobi_gauss_seidel.py` | Performance and accuracy comparison of Jacobi and Gauss-Seidel methods for the two-dimensional Poisson equation. |
 
 ### Jacobi versus Gauss-Seidel
 
@@ -482,6 +484,57 @@ The observed convergence orders confirm approximately second-order accuracy of t
 4. `poisson_equation_2d_error.png` – absolute error distribution.
 5. `poisson_equation_2d_convergence.png` – grid refinement and convergence analysis.
 
+
+### Jacobi versus Gauss-Seidel Comparison
+
+A separate numerical experiment compares the Jacobi and Gauss-Seidel iterative methods for solving the two-dimensional Poisson equation.
+
+Both methods use:
+- Computational grid: \(30\times30\).
+- Convergence tolerance: \(10^{-8}\).
+- Maximum iterations: 50,000.
+- Zero initial approximation.
+- Identical homogeneous Dirichlet boundary conditions.
+
+#### Numerical Comparison
+
+| Quantity | Jacobi | Gauss-Seidel |
+|---|---:|---:|
+| Number of iterations | 2407 | 1267 |
+| Execution time (seconds) | 0.031475 | 1.252336 |
+| Maximum absolute error | 9.1254e-04 | 9.1345e-04 |
+| Root mean square error | 4.4155e-04 | 4.4199e-04 |
+
+The measured execution times are the median of three runs following a warm-up run.
+
+#### Performance Analysis
+
+The Gauss-Seidel method requires approximately 47.36% fewer iterations than the Jacobi method.
+
+However, the vectorized Jacobi implementation is considerably faster in this experiment. The measured execution time of Gauss-Seidel is approximately 39.8 times that of Jacobi.
+
+This difference illustrates that computational performance depends not only on the number of iterations but also on implementation details and vectorization.
+
+Both methods achieve nearly identical numerical accuracy.
+
+#### Generated Comparison Figures
+
+The comparison program generates four figures:
+
+1. `poisson_iterations_comparison.png` – comparison of iteration counts.
+2. `poisson_time_comparison.png` – comparison of execution times.
+3. `poisson_accuracy_comparison.png` – comparison of maximum absolute error and RMSE.
+4. `poisson_convergence_comparison.png` – convergence histories of both iterative methods.
+
+#### Implementation Files
+
+| File | Description |
+|---|---|
+| `jacobi_poisson.py` | Vectorized Jacobi solver for the two-dimensional Poisson equation. |
+| `poisson_equation.py` | Gauss-Seidel solver with exact solution comparison and grid convergence analysis. |
+| `compare_jacobi_gauss_seidel.py` | Performance and accuracy comparison of Jacobi and Gauss-Seidel methods. |
+
+
 ## 10. Required Libraries
 
 - NumPy
@@ -506,6 +559,9 @@ python pde/wave_equation.py
 python pde/wave_equation_2d.py
 python pde/compare_iterative_methods.py
 python pde/heat_diffusion_project.py
+python pde/poisson_equation.py
+python pde/jacobi_poisson.py
+python pde/compare_jacobi_gauss_seidel.py
 ```
 
 ## 12. Expected Output
