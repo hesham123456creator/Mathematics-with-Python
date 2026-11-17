@@ -76,7 +76,9 @@ The directory also includes independent programs illustrating other PDE models a
 | `wave_equation_2d.py` | Numerical solution of the two-dimensional wave equation using an explicit finite difference scheme, with accuracy and convergence analysis. |
 | `compare_iterative_methods.py` | Comparison of Jacobi and Gauss-Seidel methods for solving a two-dimensional Laplace problem. |
 | `jacobi_poisson.py` | Numerical solution of the two-dimensional Poisson equation using the Jacobi iterative method. |
-| `compare_jacobi_gauss_seidel.py` | Performance and accuracy comparison of Jacobi and Gauss-Seidel methods for the two-dimensional Poisson equation. |
+| `compare_jacobi_gauss_seidel.py` | Performance and accuracy comparison of Jacobi, Gauss-Seidel, and SOR methods for the two-dimensional Poisson equation. |
+| `sor_poisson.py` | Numerical solution of the two-dimensional Poisson equation using the Successive Over-Relaxation (SOR) method. |
+| `sor_parameter_study.py` | Investigation of the effect of the relaxation parameter on SOR convergence, execution time, and numerical accuracy. |
 
 ### Jacobi versus Gauss-Seidel
 
@@ -485,46 +487,72 @@ The observed convergence orders confirm approximately second-order accuracy of t
 5. `poisson_equation_2d_convergence.png` – grid refinement and convergence analysis.
 
 
-### Jacobi versus Gauss-Seidel Comparison
+### Jacobi, Gauss-Seidel, and SOR Comparison
 
-A separate numerical experiment compares the Jacobi and Gauss-Seidel iterative methods for solving the two-dimensional Poisson equation.
+A numerical experiment compares three iterative methods—Jacobi, Gauss-Seidel, and Successive Over-Relaxation (SOR)—for solving the two-dimensional Poisson equation.
 
-Both methods use:
-- Computational grid: \(30\times30\).
+All methods use identical numerical settings:
+- Interior grid points: \(30\times30\) (31 intervals in each coordinate direction).
 - Convergence tolerance: \(10^{-8}\).
 - Maximum iterations: 50,000.
 - Zero initial approximation.
 - Identical homogeneous Dirichlet boundary conditions.
+- SOR relaxation parameter: \(\omega=1.82\).
+
+The comparison evaluates the number of iterations, execution time, maximum absolute error, and root mean square error (RMSE).
 
 #### Numerical Comparison
 
-| Quantity | Jacobi | Gauss-Seidel |
-|---|---:|---:|
-| Number of iterations | 2407 | 1267 |
-| Execution time (seconds) | 0.031475 | 1.252336 |
-| Maximum absolute error | 9.1254e-04 | 9.1345e-04 |
-| Root mean square error | 4.4155e-04 | 4.4199e-04 |
-
+| Quantity | Jacobi | Gauss-Seidel | SOR (\(\omega=1.82\)) |
+|---|---:|---:|---:|
+| Number of iterations | 2557 | 1347 | 98 |
+| Execution time (seconds) | 0.033829 | 1.403746 | 0.113893 |
+| Maximum absolute error | 8.5215e-04 | 8.5313e-04 | 8.5411e-04 |
+| Root mean square error | 4.1382e-04 | 4.1430e-04 | 4.1478e-04 |
 The measured execution times are the median of three runs following a warm-up run.
 
 #### Performance Analysis
 
-The Gauss-Seidel method requires approximately 47.36% fewer iterations than the Jacobi method.
+The results show that:
 
-However, the vectorized Jacobi implementation is considerably faster in this experiment. The measured execution time of Gauss-Seidel is approximately 39.8 times that of Jacobi.
+- Gauss-Seidel requires 47.32% fewer iterations than Jacobi.
+- SOR requires 96.17% fewer iterations than Jacobi.
+- SOR requires 92.72% fewer iterations than Gauss-Seidel.
+- SOR is approximately 12.33 times faster than Gauss-Seidel in this implementation.
 
-This difference illustrates that computational performance depends not only on the number of iterations but also on implementation details and vectorization.
+Although SOR substantially reduces the iteration count, vectorized Jacobi is the fastest method in terms of measured execution time. This illustrates that computational efficiency depends not only on the number of iterations but also on the implementation of each method.
 
-Both methods achieve nearly identical numerical accuracy.
+All three methods produce comparable numerical accuracy.
+
+#### Comparison Figures
+
+The following figures illustrate the performance and accuracy of the three iterative methods:
+
+**Iteration Count**
+
+![Poisson Iterations Comparison](../images/poisson_iterations_comparison.png)
+
+**Execution Time**
+
+![Poisson Execution Time Comparison](../images/poisson_time_comparison.png)
+
+**Numerical Accuracy**
+
+![Poisson Accuracy Comparison](../images/poisson_accuracy_comparison.png)
+
+**Convergence History**
+
+![Poisson Convergence Comparison](../images/poisson_convergence_comparison.png)
+
 
 #### Generated Comparison Figures
 
 The comparison program generates four figures:
 
-1. `poisson_iterations_comparison.png` – comparison of iteration counts.
+1. `poisson_iterations_comparison.png` – comparison of iteration counts for Jacobi, Gauss-Seidel, and SOR.
 2. `poisson_time_comparison.png` – comparison of execution times.
 3. `poisson_accuracy_comparison.png` – comparison of maximum absolute error and RMSE.
-4. `poisson_convergence_comparison.png` – convergence histories of both iterative methods.
+4. `poisson_convergence_comparison.png` – convergence histories of all three iterative methods.
 
 #### Implementation Files
 
@@ -532,8 +560,47 @@ The comparison program generates four figures:
 |---|---|
 | `jacobi_poisson.py` | Vectorized Jacobi solver for the two-dimensional Poisson equation. |
 | `poisson_equation.py` | Gauss-Seidel solver with exact solution comparison and grid convergence analysis. |
-| `compare_jacobi_gauss_seidel.py` | Performance and accuracy comparison of Jacobi and Gauss-Seidel methods. |
+| `sor_poisson.py` | Successive Over-Relaxation (SOR) solver for the two-dimensional Poisson equation. |
+| `sor_parameter_study.py` | Coarse and refined parameter studies to investigate the effect of the relaxation parameter on SOR convergence. |
+| `compare_jacobi_gauss_seidel.py` | Performance and accuracy comparison of Jacobi, Gauss-Seidel, and SOR methods. |
 
+### SOR Relaxation Parameter Study
+
+The performance of the SOR method depends strongly on the relaxation parameter \(\omega\).
+
+A numerical experiment investigates the effect of varying \(\omega\) on the number of iterations, execution time, and numerical accuracy.
+
+The study consists of two stages:
+
+1. **Coarse parameter sweep:** \(\omega\) varies from 1.0 to 1.9 in increments of 0.1.
+2. **Refined parameter sweep:** \(\omega\) varies from 1.70 to 1.90 in increments of 0.01.
+
+For the \(30\times30\) interior grid, the refined study identifies \(\omega=1.82\) as the best tested value, requiring only 98 iterations to reach the prescribed tolerance of \(10^{-8}\).
+
+The theoretical optimal relaxation parameter for this problem is
+
+\[
+\omega_{\mathrm{opt}}
+=
+\frac{2}{1+\sin\left(\frac{\pi}{n+1}\right)}
+\approx 1.8163,
+\]
+
+where \(n=30\) is the number of interior grid points in each coordinate direction. The numerical result is therefore consistent with the theoretical prediction.
+
+#### SOR Parameter Study Figures
+
+**Iteration Count**
+
+![SOR Refined Iterations](../images/sor_refined_iterations.png)
+
+**Execution Time**
+
+![SOR Refined Execution Time](../images/sor_refined_time.png)
+
+**Numerical Accuracy**
+
+![SOR Refined Accuracy](../images/sor_refined_accuracy.png)
 
 ## 10. Required Libraries
 
@@ -561,6 +628,8 @@ python pde/compare_iterative_methods.py
 python pde/heat_diffusion_project.py
 python pde/poisson_equation.py
 python pde/jacobi_poisson.py
+python pde/sor_poisson.py
+python pde/sor_parameter_study.py
 python pde/compare_jacobi_gauss_seidel.py
 ```
 
@@ -606,6 +675,26 @@ The two-dimensional Laplace equation program generates five figures:
 3. `laplace_equation_2d_contour.png` – contour plot of the numerical solution.
 4. `laplace_equation_2d_error.png` – spatial distribution of the absolute numerical error.
 5. `laplace_equation_2d_convergence.png` – log-log convergence plot for the grid refinement study.
+
+The two-dimensional Poisson equation project generates twelve figures:
+
+**Jacobi, Gauss-Seidel, and SOR comparison:**
+
+1. `poisson_iterations_comparison.png` – comparison of the number of iterations required by the three methods.
+2. `poisson_time_comparison.png` – comparison of execution times.
+3. `poisson_accuracy_comparison.png` – comparison of maximum numerical errors.
+4. `poisson_convergence_comparison.png` – comparison of convergence histories.
+
+**SOR solver and relaxation parameter study:**
+
+5. `poisson_sor_2d.png` – numerical solution of the two-dimensional Poisson equation using SOR.
+6. `poisson_sor_error.png` – absolute error between the numerical and exact solutions.
+7. `sor_parameter_iterations.png` – number of iterations for different relaxation parameters in the coarse parameter sweep.
+8. `sor_parameter_time.png` – execution time for different relaxation parameters in the coarse parameter sweep.
+9. `sor_parameter_accuracy.png` – maximum numerical error for different relaxation parameters in the coarse parameter sweep.
+10. `sor_refined_iterations.png` – number of iterations in the refined relaxation parameter study.
+11. `sor_refined_time.png` – execution time in the refined relaxation parameter study.
+12. `sor_refined_accuracy.png` – maximum numerical error in the refined relaxation parameter study.
 
 ## 13. Learning Outcomes
 

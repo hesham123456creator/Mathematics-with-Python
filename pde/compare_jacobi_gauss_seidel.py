@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 Lx = 1.0
 Ly = 1.0
 
-Nx = 30
-Ny = 30
+Nx = 31
+Ny = 31
 
 tolerance = 1e-8
 max_iterations = 50000
@@ -103,6 +103,50 @@ def gauss_seidel(Nx, Ny, tolerance, max_iterations):
     return x, y, X, Y, u, iteration, max_change, history
 
 
+def sor(Nx, Ny, tolerance, max_iterations, omega=1.82):
+
+    x = np.linspace(0.0, Lx, Nx + 1)
+    y = np.linspace(0.0, Ly, Ny + 1)
+
+    dx = Lx / Nx
+    dy = Ly / Ny
+
+    X, Y = np.meshgrid(x, y)
+    f = source_term(X, Y)
+
+    u = np.zeros((Ny + 1, Nx + 1))
+    history = []
+
+    for iteration in range(1, max_iterations + 1):
+
+        max_change = 0.0
+
+        for j in range(1, Ny):
+            for i in range(1, Nx):
+
+                old_value = u[j, i]
+
+                gs_value = (
+                    dy**2 * (u[j, i+1] + u[j, i-1])
+                    + dx**2 * (u[j+1, i] + u[j-1, i])
+                    - dx**2 * dy**2 * f[j, i]
+                ) / (2.0 * (dx**2 + dy**2))
+
+                u[j, i] = (
+                    (1.0 - omega) * old_value
+                    + omega * gs_value
+                )
+
+                change = abs(u[j, i] - old_value)
+                max_change = max(max_change, change)
+
+        history.append(max_change)
+
+        if max_change < tolerance:
+            break
+
+    return x, y, X, Y, u, iteration, max_change, history
+
 def calculate_errors(u, X, Y):
 
     u_exact = exact_solution(X, Y)
@@ -124,16 +168,19 @@ def main():
     print(f"Grid size: {Nx} x {Ny}")
     print(f"Tolerance: {tolerance:.1e}")
 
-    # Warm-up both methods before timing
+    # Warm-up all methods before timing
     jacobi(Nx, Ny, tolerance, max_iterations)
     gauss_seidel(Nx, Ny, tolerance, max_iterations)
+    sor(Nx, Ny, tolerance, max_iterations, omega=1.82)
 
     results = {}
 
     # Run each method three times and use median execution time
     for name, solver in [
         ("Jacobi", jacobi),
-        ("Gauss-Seidel", gauss_seidel)
+        ("Gauss-Seidel", gauss_seidel),
+        ("SOR (omega=1.82)", lambda Nx, Ny, tol, max_iter:
+          sor(Nx, Ny, tol, max_iter, omega=1.82))
     ]:
 
         times = []
@@ -194,22 +241,30 @@ def main():
 
     jacobi_iterations = results["Jacobi"]["iterations"]
     gs_iterations = results["Gauss-Seidel"]["iterations"]
-
-    reduction = (
-        (jacobi_iterations - gs_iterations)
-        / jacobi_iterations * 100
-    )
-
-    speedup = (
-        results["Jacobi"]["time"]
-        / results["Gauss-Seidel"]["time"]
-    )
+    sor_iterations = results["SOR (omega=1.82)"]["iterations"]
 
     print("\nPerformance Analysis")
-    print("=" * 50)
+    print("=" * 60)
 
-    print(f"Iteration reduction: {reduction:.2f}%")
-    print(f"Measured time ratio (Jacobi / GS): {speedup:.3f}")
+    print(
+        f"GS iteration reduction vs Jacobi: "
+        f"{(jacobi_iterations - gs_iterations) / jacobi_iterations * 100:.2f}%"
+    )
+
+    print(
+        f"SOR iteration reduction vs Jacobi: "
+        f"{(jacobi_iterations - sor_iterations) / jacobi_iterations * 100:.2f}%"
+    )
+
+    print(
+        f"SOR iteration reduction vs GS: "
+        f"{(gs_iterations - sor_iterations) / gs_iterations * 100:.2f}%"
+    )
+
+    print(
+        f"SOR speedup vs GS: "
+        f"{results['Gauss-Seidel']['time'] / results['SOR (omega=1.82)']['time']:.3f}"
+    )
 
     # --------------------------------------------------
     # 1. Iteration comparison
