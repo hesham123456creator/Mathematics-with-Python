@@ -76,10 +76,42 @@ The projects combine mathematical theory, computational implementation, numerica
 [Explore Differential Equations Projects](differential_equations/)
 
 ### 3. Partial Differential Equations
-- Heat diffusion equation
-- Finite difference methods
-- Numerical simulation
-- Error analysis
+
+**Heat Diffusion Equation**
+- Heat diffusion simulation
+- Explicit finite difference methods
+- Stability analysis
+- Numerical visualization
+
+**Laplace and Poisson Equations**
+- Two-dimensional Poisson equation
+- Finite difference discretization
+- Jacobi iterative method
+- Gauss–Seidel method
+- Successive Over-Relaxation (SOR)
+- Conjugate Gradient (CG) method
+- Numerical accuracy and error analysis
+- Convergence and performance comparisons
+
+**Comparison of Four Numerical Methods for the 2D Poisson Equation**
+
+The project implements and compares four numerical methods for solving the two-dimensional Poisson equation.
+[View Python Implementation](pde/compare_poisson_methods.py)
+
+| Method | Numerical approach |
+|---|---|
+| Jacobi | Iterative method |
+| Gauss–Seidel | Iterative method |
+| SOR | Relaxation method |
+| Conjugate Gradient | Krylov subspace method |
+
+**Numerical Visualizations**
+
+![Numerical Solutions](images/poisson_methods_solutions.png)
+
+![Convergence Comparison](images/poisson_methods_convergence.png)
+
+![Error Comparison](images/poisson_methods_errors.png)
 
 [Explore PDE Projects](pde/)
 
