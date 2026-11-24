@@ -125,6 +125,7 @@ The project implements and compares four numerical methods for solving the two-d
 | Nonlinear Boundary Value Problem | SciPy `solve_bvp()` |
 | Heat Diffusion Simulation | Finite difference method |
 | Eigenvalue Accuracy | Numerical eigenvalue analysis |
+| 2D Poisson Equation | Jacobi, Gauss–Seidel, SOR and Conjugate Gradient |
 
 ## Python Technologies
 
