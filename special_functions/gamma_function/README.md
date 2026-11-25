@@ -2,7 +2,7 @@
 
 ## 1. Overview
 
-This project explores the Gamma function using Python. It combines mathematical properties, numerical computation, verification of important identities, and graphical visualization.
+This project explores the Gamma function using Python. It combines mathematical properties, numerical computation, verification of important identities, error analysis, and graphical visualization.
 
 The Gamma function is a fundamental special function that extends the factorial function to non-integer arguments.
 
@@ -50,6 +50,25 @@ The corresponding minimum value is
 \Gamma(x_{\min})\approx 0.885603.
 \]
 
+### 3.5 Euler's Reflection Formula
+
+For \(0<x<1\),
+
+\[
+\Gamma(x)\Gamma(1-x)
+=\frac{\pi}{\sin(\pi x)}.
+\]
+
+### 3.6 Legendre's Duplication Formula
+
+For \(x>0\),
+
+\[
+\Gamma(x)\Gamma\left(x+\frac12\right)
+=
+2^{1-2x}\sqrt{\pi}\Gamma(2x).
+\]
+
 ## 4. Python Libraries
 
 The implementation uses:
@@ -70,27 +89,76 @@ The Python program performs:
 4. Verification of the special value at \(x=1/2\).
 5. Graphical visualization of the Gamma function.
 6. Numerical determination of its minimum using SciPy optimization.
+7. Numerical verification of Euler's reflection formula.
+8. Numerical verification of Legendre's duplication formula.
+9. Absolute and relative error analysis for both identities.
+10. Graphical comparison of the relative errors.
 
-## 6. Visualizations
+## 6. Numerical Error Analysis
 
-### 6.1 Gamma Function
+The numerical accuracy of the two Gamma function identities is investigated using absolute and relative errors.
+
+The absolute error is defined as
+
+\[
+E_{\mathrm{abs}}=|L-R|,
+\]
+
+where \(L\) and \(R\) denote the left-hand and right-hand sides of the identity.
+
+The relative error is defined as
+
+\[
+E_{\mathrm{rel}}=\frac{|L-R|}{|R|}.
+\]
+
+### 6.1 Numerical Results
+
+The numerical experiments produce the following maximum errors.
+
+| Identity | Maximum absolute error | Maximum relative error |
+|---|---:|---:|
+| Reflection formula | \(5.33\times10^{-15}\) | \(5.24\times10^{-16}\) |
+| Duplication formula | \(1.78\times10^{-15}\) | \(6.40\times10^{-16}\) |
+
+The results demonstrate excellent numerical agreement between both sides of the identities, with errors consistent with double-precision floating-point rounding.
+
+## 7. Visualizations
+
+### 7.1 Gamma Function
 
 ![Gamma Function](gamma_function_plot.png)
 
-### 6.2 Gamma Function and Its Numerical Minimum
+### 7.2 Gamma Function and Its Numerical Minimum
 
 ![Gamma Function Minimum](gamma_function_minimum.png)
 
-## 7. Project Structure
+### 7.3 Euler's Reflection Formula
+
+![Gamma Reflection Formula](gamma_reflection_formula.png)
+
+### 7.4 Legendre's Duplication Formula
+
+![Gamma Duplication Formula](gamma_duplication_formula.png)
+
+### 7.5 Numerical Error Comparison
+
+![Gamma Formula Error Comparison](gamma_formula_error_comparison.png)
+
+## 8. Project Structure
 
 ```text
 gamma_function/
 ├── gamma_function.py
 ├── gamma_function_plot.png
 ├── gamma_function_minimum.png
+├── gamma_reflection_formula.png
+├── gamma_duplication_formula.png
+├── gamma_formula_error_comparison.png
 └── README.md
+```
 
-## 8. How to Run
+## 9. How to Run
 
 From the root directory of the repository:
 
@@ -98,7 +166,13 @@ From the root directory of the repository:
 python special_functions/gamma_function/gamma_function.py
 ```
 
-## 9. Learning Outcomes
+Required libraries can be installed using:
+
+```bash
+pip install numpy scipy sympy matplotlib
+```
+
+## 10. Learning Outcomes
 
 This project demonstrates practical skills in:
 
@@ -106,6 +180,7 @@ This project demonstrates practical skills in:
 - Numerical evaluation using SciPy.
 - Verification of mathematical identities.
 - Numerical optimization.
+- Absolute and relative error analysis.
 - Scientific computing with Python.
 - Mathematical visualization using Matplotlib.
 
