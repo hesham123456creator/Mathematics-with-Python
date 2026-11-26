@@ -115,6 +115,23 @@ The project implements and compares four numerical methods for solving the two-d
 
 [Explore PDE Projects](pde/)
 
+### 4. Special Functions
+
+**Classical Special Functions**
+- Gamma function
+- Beta function
+- Digamma and polygamma functions
+- Nielsen's beta function
+
+**Hypergeometric Functions**
+- Gauss hypergeometric function
+- Parameter differentiation
+- Connections with the Psi function
+- Harmonic-number series representations
+- Asymptotic analysis and remainder estimates
+
+[Explore Special Functions Projects](special_functions/)
+
 ## Featured Computational Projects
 
 | Project | Mathematical Method |
@@ -126,6 +143,7 @@ The project implements and compares four numerical methods for solving the two-d
 | Heat Diffusion Simulation | Finite difference method |
 | Eigenvalue Accuracy | Numerical eigenvalue analysis |
 | 2D Poisson Equation | Jacobi, Gauss–Seidel, SOR and Conjugate Gradient |
+| Gauss–Psi Connection | Hypergeometric parameter differentiation and asymptotic analysis |
 
 ## Python Technologies
 
