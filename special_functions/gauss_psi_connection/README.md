@@ -210,3 +210,37 @@ The Python program `remainder_bounds.py` verifies the bounds using high-precisio
 ![Remainder Bounds](images/gauss_psi_remainder_bounds.png)
 
 The numerical results confirm that the enclosure becomes narrower as the number of retained terms increases.
+
+## 11. Numerical Sharpness of the Remainder Bounds
+
+To investigate the sharpness of the theoretical bounds, we compare
+the actual remainder with its lower and upper estimates.
+
+For fixed N and z, define the relative errors
+
+\[
+E_L=\frac{R_N(z)-L_p(N,z)}{R_N(z)},
+\qquad
+E_U=\frac{U_p(N,z)-R_N(z)}{R_N(z)}.
+\]
+
+The numerical experiment uses N = 50 and z = 0.7.
+
+The results show that both relative errors decrease as the number
+of retained terms p increases. In this example, the upper bound
+provides a particularly sharp approximation.
+
+For p = 30, the relative errors are approximately
+
+- Lower bound: 0.00160%.
+- Upper bound: 0.0000346%.
+
+### Numerical illustration
+
+![Sharpness of Gauss-Psi Remainder Bounds](images/gauss_psi_bound_sharpness.png)
+
+The experiment also illustrates that the convergence of the bounds
+becomes slower as z approaches 1.
+
+These numerical observations complement the rigorous two-sided
+remainder theorem established in Section 10.

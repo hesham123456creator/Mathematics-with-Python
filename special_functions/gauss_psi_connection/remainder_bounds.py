@@ -131,3 +131,68 @@ plt.savefig(
 plt.show()
 
 print("\nPlot saved successfully!")
+
+# --------------------------------------------------
+# Sharpness study: relative errors of the bounds
+# --------------------------------------------------
+
+N = 50
+z = mp.mpf("0.7")
+
+p_values = list(range(1, 31))
+
+R = actual_remainder(N, z)
+
+lower_errors = []
+upper_errors = []
+
+print("\nSHARPNESS STUDY")
+print("=" * 65)
+print(f"N = {N}, z = {z}")
+print(f"Actual remainder = {mp.nstr(R, 12)}")
+
+for p in p_values:
+    L = lower_bound(N, z, p)
+    U = upper_bound(N, z, p)
+
+    error_L = (R - L) / R
+    error_U = (U - R) / R
+
+    lower_errors.append(float(error_L))
+    upper_errors.append(float(error_U))
+
+    if p in [1, 2, 5, 10, 20, 30]:
+        print(
+            f"p = {p:2d} | "
+            f"Lower relative error = {mp.nstr(error_L, 8)} | "
+            f"Upper relative error = {mp.nstr(error_U, 8)}"
+        )
+
+plt.figure(figsize=(9, 6))
+
+plt.semilogy(
+    p_values, lower_errors,
+    marker="o", label="Lower bound error"
+)
+
+plt.semilogy(
+    p_values, upper_errors,
+    marker="s", label="Upper bound error"
+)
+
+plt.xlabel("Number of retained terms p")
+plt.ylabel("Relative error")
+plt.title("Sharpness of Gauss-Psi Remainder Bounds")
+
+plt.legend()
+plt.grid(True, which="both", linestyle="--", alpha=0.6)
+plt.tight_layout()
+
+plt.savefig(
+    "images/gauss_psi_bound_sharpness.png",
+    dpi=300
+)
+
+plt.show()
+
+print("\nSharpness study completed successfully!")
