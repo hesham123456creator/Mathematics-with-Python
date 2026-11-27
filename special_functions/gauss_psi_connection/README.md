@@ -162,3 +162,51 @@ Future work will focus on:
 - Higher-order remainder approximations.
 - Analytical inequalities involving harmonic numbers and digamma functions.
 - Further applications of parameter derivatives of hypergeometric functions.
+
+## 10. Rigorous Bounds for the Gauss-Psi Remainder
+
+This project establishes rigorous two-sided bounds for the truncation remainder
+
+\[
+R_N(z)=\sum_{n=N+1}^{\infty}a_nz^n,
+\qquad
+a_n=\frac{2H_n}{n+2}.
+\]
+
+For integers \(N\geq1\), \(p\geq1\), and \(0<z<1\), we obtain
+
+\[
+L_p(N,z)<R_N(z)<U_p(N,z),
+\]
+
+where
+
+\[
+L_p(N,z)=
+\sum_{k=0}^{p-1}a_{N+1+k}z^{N+1+k}
+\]
+
+and
+
+\[
+U_p(N,z)=L_p(N,z)+
+\frac{a_{N+p+1}z^{N+p+1}}{1-z}.
+\]
+
+The enclosure width is
+
+\[
+U_p-L_p=
+\frac{2H_{N+p+1}}{N+p+3}
+\frac{z^{N+p+1}}{1-z}.
+\]
+
+### Numerical Verification
+
+The Python program `remainder_bounds.py` verifies the bounds using high-precision arithmetic and compares different values of \(N\), \(z\), and \(p\).
+
+### Convergence of the Remainder Bounds
+
+![Remainder Bounds](images/gauss_psi_remainder_bounds.png)
+
+The numerical results confirm that the enclosure becomes narrower as the number of retained terms increases.
