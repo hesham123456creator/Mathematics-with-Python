@@ -97,7 +97,7 @@ plt.title("Gauss Hypergeometric–Psi Connection")
 plt.legend()
 plt.grid(True)
 
-plt.savefig("gauss_psi_comparison.png", dpi=300)
+plt.savefig("images/gauss_psi_comparison.png", dpi=300)
 plt.show()
 
 # --------------------------------------------------
@@ -129,58 +129,16 @@ plt.title("Convergence of the Harmonic-Number Series")
 plt.legend()
 plt.grid(True)
 
-plt.savefig("gauss_psi_truncation_error.png", dpi=300)
+plt.savefig("images/gauss_psi_truncation_error.png", dpi=300)
 plt.show()
 
-# --------------------------------------------------
-# Asymptotic truncation error verification
-# --------------------------------------------------
-
-from scipy.special import digamma
-EULER_GAMMA = 0.5772156649015329
-
-z_values = [0.3, 0.5, 0.7, 0.9]
-N_values = [50, 100, 200, 500, 1000]
-
-print("\nAsymptotic truncation error verification")
-print("-" * 85)
-print(
-    f"{'z':>6} {'N':>8} {'Actual error':>18} "
-    f"{'Asymptotic estimate':>22} {'Ratio':>12}"
-)
-
-for z in z_values:
-    for N in N_values:
-
-        # Actual truncation error
-        actual_error = abs(
-            closed_form(z) - harmonic_series(z, N)
-        )
-
-        # H_(N+1) = psi(N+2) + Euler's constant
-        H = digamma(N + 2) + EULER_GAMMA
-
-        # Asymptotic estimate
-        asymptotic = (
-            2 * H / (N + 3)
-            * z**(N + 1) / (1 - z)
-        )
-
-        ratio = actual_error / asymptotic
-
-        print(
-            f"{z:6.2f} {N:8d} "
-            f"{actual_error:18.6e} "
-            f"{asymptotic:22.6e} "
-            f"{ratio:12.6f}"
-        )
 # --------------------------------------------------
 # High-precision asymptotic error verification
 # --------------------------------------------------
 
 import mpmath as mp
 
-mp.mp.dps = 50
+mp.mp.dps = 800
 
 print("\nHigh-precision asymptotic error verification")
 print("-" * 90)
@@ -297,8 +255,8 @@ plt.legend()
 plt.grid(True)
 
 plt.savefig(
-    "gauss_psi_asymptotic_ratio.png",
-    dpi=300
+   "images/gauss_psi_asymptotic_ratio.png",    
+   dpi=300
 )
 
 plt.show()
@@ -451,7 +409,7 @@ plt.legend()
 plt.grid(True)
 
 plt.savefig(
-    "gauss_psi_asymptotic_accuracy.png",
+    "images/gauss_psi_asymptotic_accuracy.png",
     dpi=300
 )
 
