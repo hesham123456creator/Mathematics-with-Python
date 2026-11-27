@@ -196,3 +196,115 @@ plt.savefig(
 plt.show()
 
 print("\nSharpness study completed successfully!")
+
+# --------------------------------------------------
+# Sharper harmonic-number upper bound
+# --------------------------------------------------
+
+def sharper_upper_bound(N, z, p):
+    """
+    Sharper upper bound for the Gauss-Psi remainder.
+
+    Uses an estimate involving harmonic numbers.
+    """
+
+    m = N + p + 1
+
+    Hm = mp.harmonic(m)
+
+    Cm = Hm - mp.mpf(m + 2) / (m + 1)
+
+    Sm = (
+        -mp.log(1 - z)
+        - sum(z**k / k for k in range(1, m + 2))
+    ) / z**(m + 2)
+
+    L = lower_bound(N, z, p)
+
+    tail_bound = z**m * (
+        2 / ((m + 1) * (1 - z))
+        + 2 * Cm * Sm
+    )
+
+    return L + tail_bound
+
+# --------------------------------------------------
+# Comparison: original and sharper upper bounds
+# --------------------------------------------------
+
+print("\nCOMPARISON OF UPPER BOUNDS")
+print("=" * 75)
+
+test_cases = [
+    (10, mp.mpf("0.5"), 5),
+    (50, mp.mpf("0.7"), 10),
+    (100, mp.mpf("0.9"), 20),
+]
+
+for N, z, p in test_cases:
+
+    R = actual_remainder(N, z)
+
+    U_original = upper_bound(N, z, p)
+    U_sharper = sharper_upper_bound(N, z, p)
+
+    print(f"\nN = {N}, z = {z}, p = {p}")
+    print(f"Actual remainder:  {mp.nstr(R, 12)}")
+    print(f"Original upper:    {mp.nstr(U_original, 12)}")
+    print(f"Sharper upper:     {mp.nstr(U_sharper, 12)}")
+
+    print(
+        "Sharper bound is valid:",
+        U_sharper > R
+    )
+
+    print(
+        "Sharper than original:",
+        U_sharper < U_original
+    )
+# --------------------------------------------------
+# Systematic verification of the sharper upper bound
+# --------------------------------------------------
+
+print("\nSYSTEMATIC VERIFICATION OF THE NEW THEOREM")
+print("=" * 75)
+
+test_N = [1, 5, 10, 50, 100]
+test_p = [1, 2, 5, 10, 20]
+test_z = [
+    mp.mpf("0.2"),
+    mp.mpf("0.5"),
+    mp.mpf("0.7"),
+    mp.mpf("0.9"),
+    mp.mpf("0.99")
+]
+
+total_tests = 0
+passed_tests = 0
+
+for N in test_N:
+    for p in test_p:
+        for z in test_z:
+
+            R = actual_remainder(N, z)
+            L = lower_bound(N, z, p)
+            U_new = sharper_upper_bound(N, z, p)
+            U_old = upper_bound(N, z, p)
+
+            valid = (
+                L < R < U_new < U_old
+            )
+
+            total_tests += 1
+
+            if valid:
+                passed_tests += 1
+
+print(f"Total tests: {total_tests}")
+print(f"Passed tests: {passed_tests}")
+print(f"Failed tests: {total_tests - passed_tests}")
+
+if passed_tests == total_tests:
+    print("\nALL TESTS PASSED!")
+else:
+    print("\nSOME TESTS FAILED!")
